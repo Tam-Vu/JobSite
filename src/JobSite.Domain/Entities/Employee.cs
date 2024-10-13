@@ -4,18 +4,19 @@ namespace JobSite.Domain.Entities;
 
 public class Employee : BaseAuditableEntity
 {
-    public required string name { get; set; }
+    public required string fullname { get; set; }
     public string? image { get; set; }
     public string? address { get; set; }
     public string? phone { get; set; }
     public string? email { get; set; }
-    public Guid accountId { get; }
+    public required Guid accountId { get; init; }
+    public Account? account { get; set; }
     public ICollection<Resume> resumes { get; private set; } = new HashSet<Resume>();
 
-    public Employee(Guid id, string image, string address, string name, string phone, string email, Guid accountId)
+    public Employee(Guid id, string image, string address, string fullname, string phone, string email, Guid accountId)
         : base(id == Guid.Empty ? Guid.NewGuid() : id)
     {
-        this.name = name;
+        this.fullname = fullname;
         this.image = image;
         this.address = address;
         this.phone = phone;

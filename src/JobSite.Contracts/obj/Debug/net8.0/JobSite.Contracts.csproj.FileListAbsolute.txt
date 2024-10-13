@@ -9,3 +9,4 @@ D:\projectAndExcercise\.NET\JobSite\src\JobSite.Contracts\obj\Debug\net8.0\JobSi
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Contracts\obj\Debug\net8.0\refint\JobSite.Contracts.dll
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Contracts\obj\Debug\net8.0\JobSite.Contracts.pdb
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Contracts\obj\Debug\net8.0\ref\JobSite.Contracts.dll
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Contracts\obj\Debug\net8.0\JobSite.Contracts.sourcelink.json

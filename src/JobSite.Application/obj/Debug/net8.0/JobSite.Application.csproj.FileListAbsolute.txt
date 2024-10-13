@@ -13,3 +13,4 @@ D:\projectAndExcercise\.NET\JobSite\src\JobSite.Application\obj\Debug\net8.0\Job
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Application\obj\Debug\net8.0\refint\JobSite.Application.dll
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Application\obj\Debug\net8.0\JobSite.Application.pdb
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Application\obj\Debug\net8.0\ref\JobSite.Application.dll
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Application\obj\Debug\net8.0\JobSite.Application.sourcelink.json

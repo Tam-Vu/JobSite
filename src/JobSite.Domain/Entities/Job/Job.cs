@@ -10,11 +10,14 @@ public class Job : BaseAuditableEntity
     public string? location { get; set; }
     public SqlMoney salary { get; set; }
     public JobType jobType { get; set; }
+    public int appliedResumes { get; set; }
     public JobStatus jobStatus { get; set; }
     public ICollection<Requirement> requirements { get; set; } = new HashSet<Requirement>();
-    public ICollection<Application> Applications { get; set; } = new HashSet<Application>();
-    public ICollection<InterviewSchedule> InterviewSchedules { get; set; } = new HashSet<InterviewSchedule>();
-    public Guid employerId { get; }
+    public ICollection<Application> applications { get; set; } = new HashSet<Application>();
+    public ICollection<InterviewSchedule> interviewSchedules { get; set; } = new HashSet<InterviewSchedule>();
+    public required Guid employerId { get; init; }
+    public Employer? employer { get; set; }
+
     public Job(Guid id, string title, string description, string location, SqlMoney salary, JobType jobType,
     JobStatus jobStatus, ICollection<Requirement> requirements, Guid employerId) : base(id == Guid.Empty ? Guid.NewGuid() : id)
     {
@@ -25,6 +28,7 @@ public class Job : BaseAuditableEntity
         this.jobType = jobType;
         this.jobStatus = jobStatus;
         this.requirements = requirements;
+        this.appliedResumes = 0;
         this.employerId = employerId;
     }
 }

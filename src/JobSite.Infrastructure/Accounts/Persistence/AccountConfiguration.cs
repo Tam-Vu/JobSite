@@ -1,7 +1,4 @@
 
-using JobSite.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JobSite.Infrastructure.Accounts.Persistence;
 public class AccountConfiguration : IEntityTypeConfiguration<Account>

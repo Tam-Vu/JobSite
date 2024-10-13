@@ -52,3 +52,6 @@ D:\projectAndExcercise\.NET\JobSite\src\JobSite.Api\obj\Debug\net8.0\refint\JobS
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Api\obj\Debug\net8.0\JobSite.Api.pdb
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Api\obj\Debug\net8.0\JobSite.Api.genruntimeconfig.cache
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Api\obj\Debug\net8.0\ref\JobSite.Api.dll
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Api\bin\Debug\net8.0\AutoMapper.dll
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Api\bin\Debug\net8.0\FluentValidation.dll
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Api\obj\Debug\net8.0\JobSite.Api.sourcelink.json

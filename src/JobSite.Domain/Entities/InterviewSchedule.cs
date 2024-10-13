@@ -5,8 +5,10 @@ using JobSite.Domain.Entities;
 namespace JobSite.Domain.Entities;
 public class InterviewSchedule : BaseAuditableEntity
 {
-    public Guid jobId { get; init; }
-    public Guid resumeId { get; init; }
+    public required Guid jobId { get; init; }
+    public Job? job { get; set; }
+    public required Guid resumeId { get; init; }
+    public Resume? resume { get; set; }
     public DateTime interviewDate { get; set; }
     public string? location { get; set; }
     public TimeOnly startTime { get; set; }

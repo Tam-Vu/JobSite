@@ -12,3 +12,4 @@ D:\projectAndExcercise\.NET\JobSite\src\JobSite.Domain\obj\Debug\net8.0\refint\J
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Domain\obj\Debug\net8.0\JobSite.Domain.pdb
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Domain\obj\Debug\net8.0\JobSite.Domain.genruntimeconfig.cache
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Domain\obj\Debug\net8.0\ref\JobSite.Domain.dll
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Domain\obj\Debug\net8.0\JobSite.Domain.sourcelink.json

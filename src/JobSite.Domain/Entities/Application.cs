@@ -4,8 +4,10 @@ using JobSite.Domain.Enums;
 namespace JobSite.Domain.Entities;
 public class Application : BaseAuditableEntity
 {
-    public Guid jobId { get; init; }
-    public Guid resumeId { get; init; }
+    public required Guid jobId { get; init; }
+    public Job? job { get; set; }
+    public required Guid resumeId { get; init; }
+    public Resume? resume { get; set; }
     public ApplicationStatus status { get; set; } = ApplicationStatus.Pending;
 
     public Application(Guid id, Guid jobId, Guid resumeId)
