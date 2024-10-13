@@ -1,0 +1,11 @@
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Contracts\bin\Debug\net8.0\JobSite.Contracts.deps.json
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Contracts\bin\Debug\net8.0\JobSite.Contracts.dll
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Contracts\bin\Debug\net8.0\JobSite.Contracts.pdb
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Contracts\obj\Debug\net8.0\JobSite.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Contracts\obj\Debug\net8.0\JobSite.Contracts.AssemblyInfoInputs.cache
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Contracts\obj\Debug\net8.0\JobSite.Contracts.AssemblyInfo.cs
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Contracts\obj\Debug\net8.0\JobSite.Contracts.csproj.CoreCompileInputs.cache
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Contracts\obj\Debug\net8.0\JobSite.Contracts.dll
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Contracts\obj\Debug\net8.0\refint\JobSite.Contracts.dll
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Contracts\obj\Debug\net8.0\JobSite.Contracts.pdb
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Contracts\obj\Debug\net8.0\ref\JobSite.Contracts.dll
