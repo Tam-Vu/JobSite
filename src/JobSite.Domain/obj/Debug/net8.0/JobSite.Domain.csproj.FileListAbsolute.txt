@@ -1,5 +1,4 @@
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Domain\bin\Debug\net8.0\JobSite.Domain.deps.json
-D:\projectAndExcercise\.NET\JobSite\src\JobSite.Domain\bin\Debug\net8.0\JobSite.Domain.runtimeconfig.json
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Domain\bin\Debug\net8.0\JobSite.Domain.dll
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Domain\bin\Debug\net8.0\JobSite.Domain.pdb
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Domain\obj\Debug\net8.0\JobSite.Domain.csproj.AssemblyReference.cache
@@ -10,6 +9,5 @@ D:\projectAndExcercise\.NET\JobSite\src\JobSite.Domain\obj\Debug\net8.0\JobSite.
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Domain\obj\Debug\net8.0\JobSite.Domain.dll
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Domain\obj\Debug\net8.0\refint\JobSite.Domain.dll
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Domain\obj\Debug\net8.0\JobSite.Domain.pdb
-D:\projectAndExcercise\.NET\JobSite\src\JobSite.Domain\obj\Debug\net8.0\JobSite.Domain.genruntimeconfig.cache
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Domain\obj\Debug\net8.0\ref\JobSite.Domain.dll
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Domain\obj\Debug\net8.0\JobSite.Domain.sourcelink.json

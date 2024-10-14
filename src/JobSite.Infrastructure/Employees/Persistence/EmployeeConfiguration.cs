@@ -7,10 +7,10 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedNever();
         builder.Property(x => x.fullname).IsRequired();
-        builder.Property(x => x.image).IsRequired(false);
-        builder.Property(x => x.address).IsRequired(false);
-        builder.Property(x => x.phone).IsRequired(false);
-        builder.Property(x => x.email).IsRequired(false);
+        builder.Property(x => x.image);
+        builder.Property(x => x.address);
+        builder.Property(x => x.phone);
+        builder.Property(x => x.email);
         builder.Property(x => x.accountId).IsRequired();
         builder
             .HasMany(x => x.resumes)

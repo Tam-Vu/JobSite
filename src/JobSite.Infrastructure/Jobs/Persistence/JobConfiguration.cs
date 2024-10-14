@@ -7,11 +7,13 @@ public class JobConfiguration : IEntityTypeConfiguration<Job>
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedNever();
         builder.Property(x => x.title).IsRequired();
-        builder.Property(x => x.description).IsRequired(false);
-        builder.Property(x => x.location).IsRequired(false);
-        builder.Property(x => x.salary).IsRequired(false);
+        builder.Property(x => x.description);
+        builder.Property(x => x.location);
+        builder.Property(x => x.salary)
+            .HasColumnType("decimal(18,2)");
         builder.Property(x => x.jobType).IsRequired();
-        builder.Property(x => x.jobStatus).HasDefaultValue("Active");
+        builder.Property(x => x.jobStatus);
+        // .HasDefaultValue("Active");
         builder.Property(x => x.employerId).IsRequired();
 
         builder

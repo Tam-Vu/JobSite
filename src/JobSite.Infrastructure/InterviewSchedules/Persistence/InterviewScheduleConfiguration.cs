@@ -8,7 +8,8 @@ public class InterviewScheduleConfiguration : IEntityTypeConfiguration<Interview
         builder.Property(x => x.Id).ValueGeneratedNever();
         builder.Property(x => x.interviewDate).IsRequired();
         builder.Property(x => x.startTime).IsRequired();
-        builder.Property(x => x.status).HasDefaultValue("Scheduled");
+        builder.Property(x => x.status);
+        // .HasDefaultValue("Scheduled");
         builder.Property(x => x.resumeId).IsRequired();
         builder.Property(x => x.jobId).IsRequired();
         builder

@@ -16,3 +16,5 @@ D:\projectAndExcercise\.NET\JobSite\src\JobSite.Infrastructure\obj\Debug\net8.0\
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Infrastructure\obj\Debug\net8.0\JobSite.Infrastructure.pdb
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Infrastructure\obj\Debug\net8.0\ref\JobSite.Infrastructure.dll
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Infrastructure\obj\Debug\net8.0\JobSite.Infrastructure.sourcelink.json
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Infrastructure\bin\Debug\net8.0\JobSite.Infrastructure.runtimeconfig.json
+D:\projectAndExcercise\.NET\JobSite\src\JobSite.Infrastructure\obj\Debug\net8.0\JobSite.Infrastructure.genruntimeconfig.cache

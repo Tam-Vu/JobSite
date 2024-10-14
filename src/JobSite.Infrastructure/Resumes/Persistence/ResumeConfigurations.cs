@@ -7,9 +7,9 @@ public class ResumeConfiguration : IEntityTypeConfiguration<Resume>
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedNever();
         builder.Property(x => x.title).IsRequired();
-        builder.Property(x => x.experience).IsRequired(false);
-        builder.Property(x => x.education).IsRequired(false);
-        builder.Property(x => x.file).IsRequired(false);
+        builder.Property(x => x.experience);
+        builder.Property(x => x.education);
+        builder.Property(x => x.file);
         builder.Property(x => x.employeeId).IsRequired();
         builder
             .HasOne(x => x.employee)

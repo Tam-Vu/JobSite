@@ -1,9 +1,15 @@
+using JobSite.Infrastructure;
+using JobSite.Application;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.AddApplicationBuilder();
+builder.Services.AddInfrastructureService(builder.Configuration);
+builder.AddInfrastructureBuilder();
+builder.Services.AddInfrastructureService(builder.Configuration);
 
 var app = builder.Build();
 
@@ -23,7 +29,7 @@ var summaries = new[]
 
 app.MapGet("/weatherforecast", () =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
+    var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
