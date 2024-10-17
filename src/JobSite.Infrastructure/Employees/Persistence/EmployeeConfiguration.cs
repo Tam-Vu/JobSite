@@ -6,20 +6,21 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
     {
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedNever();
-        builder.Property(x => x.fullname).IsRequired();
-        builder.Property(x => x.image);
-        builder.Property(x => x.address);
-        builder.Property(x => x.phone);
-        builder.Property(x => x.email);
-        builder.Property(x => x.accountId).IsRequired();
-        builder
-            .HasMany(x => x.resumes)
-            .WithOne()
-            .HasForeignKey(x => x.employeeId);
+        // builder.Property(x => x.fullname).IsRequired();
+        // builder.Property(x => x.image);
+        // builder.Property(x => x.address);
+        // builder.Property(x => x.phone);
+        // builder.Property(x => x.email);
+        builder.Property(x => x.AccountId).IsRequired();
+        // builder
+        //     .HasMany(x => x.resumes)
+        //     .WithOne()
+        //     .HasForeignKey(x => x.employeeId);
 
         builder
-            .HasOne(x => x.account)
+            .HasOne(x => x.Account)
             .WithMany()
-            .HasForeignKey(x => x.accountId);
+            .HasForeignKey(x => x.AccountId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

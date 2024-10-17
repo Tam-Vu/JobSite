@@ -6,21 +6,21 @@ namespace JobSite.Domain.Entities;
 
 public class Employer : BaseAuditableEntity
 {
-    public required string name { get; set; }
-    public string? description { get; set; }
-    public Sector? sector { get; set; }
-    public string? location { get; set; }
-    public string? website { get; set; }
-    public required Guid accountId { get; init; }
-    public Account? account { get; set; }
-    public ICollection<Job> jobs { get; private set; } = new HashSet<Job>();
+    public required string Name { get; set; }
+    public string? Description { get; set; }
+    public Sector? Sector { get; set; }
+    public string? Location { get; set; }
+    public string? Website { get; set; }
+    public required Guid AccountId { get; init; }
+    public Account Account { get; set; } = null!;
+    public ICollection<Job> Jobs { get; private set; } = new HashSet<Job>();
     public Employer(Guid id, string name, string description, string location, string website, Guid accountId)
         : base(id == Guid.Empty ? Guid.NewGuid() : id)
     {
-        this.name = name;
-        this.description = description;
-        this.location = location;
-        this.website = website;
-        this.accountId = accountId;
+        this.Name = name;
+        this.Description = description;
+        this.Location = location;
+        this.Website = website;
+        this.AccountId = accountId;
     }
 }

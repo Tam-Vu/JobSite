@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 [ApiController]
 [Authorize]
+[Route("api/[controller]")]
 public class BaseController : ControllerBase
 {
     protected ActionResult Problem(List<Exception> exceptions)

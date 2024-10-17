@@ -6,20 +6,22 @@ public class InterviewScheduleConfiguration : IEntityTypeConfiguration<Interview
     {
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedNever();
-        builder.Property(x => x.interviewDate).IsRequired();
-        builder.Property(x => x.startTime).IsRequired();
-        builder.Property(x => x.status);
+        // builder.Property(x => x.interviewDate).IsRequired();
+        // builder.Property(x => x.startTime).IsRequired();
+        // builder.Property(x => x.status);
         // .HasDefaultValue("Scheduled");
-        builder.Property(x => x.resumeId).IsRequired();
-        builder.Property(x => x.jobId).IsRequired();
+        builder.Property(x => x.ResumeId).IsRequired();
+        builder.Property(x => x.JobId).IsRequired();
         builder
-            .HasOne(x => x.resume)
-            .WithMany()
-            .HasForeignKey(x => x.resumeId);
+            .HasOne(x => x.Resume)
+            .WithMany(x => x.InverviewSchedules)
+            .HasForeignKey(x => x.ResumeId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder
-            .HasOne(x => x.job)
-            .WithMany()
-            .HasForeignKey(x => x.jobId);
+            .HasOne(x => x.Job)
+            .WithMany(x => x.InterviewSchedules)
+            .HasForeignKey(x => x.JobId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }
