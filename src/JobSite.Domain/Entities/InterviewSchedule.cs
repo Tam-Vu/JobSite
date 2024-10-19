@@ -13,14 +13,14 @@ public class InterviewSchedule : BaseAuditableEntity
     public string? Location { get; set; }
     public TimeOnly StartTime { get; set; }
     public InterviewStatus Status { get; set; } = InterviewStatus.Scheduled;
-    public InterviewSchedule(Guid id, Guid jobId, Guid resumeId, DateTime interviewDate, string location, TimeOnly startTime)
-        : base(id == Guid.Empty ? Guid.NewGuid() : id)
-    {
-        this.JobId = jobId;
-        this.ResumeId = resumeId;
-        this.InterviewDate = interviewDate;
-        this.Location = location;
-        this.StartTime = startTime;
-        this.Status = InterviewStatus.Scheduled;
-    }
+    // public InterviewSchedule(Guid id, Guid jobId, Guid resumeId, DateTime interviewDate, string location, TimeOnly startTime)
+    //     : base(id == Guid.Empty ? Guid.NewGuid() : id)
+    // {
+    //     this.JobId = jobId;
+    //     this.ResumeId = resumeId;
+    //     this.InterviewDate = interviewDate;
+    //     this.Location = location;
+    //     this.StartTime = startTime;
+    //     this.Status = InterviewStatus.Scheduled;
+    // }
 }

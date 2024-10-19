@@ -10,8 +10,8 @@ public abstract class BaseAuditableEntity : BaseEntity
 
     public string? LastModifiedBy { get; set; }
 
-    protected BaseAuditableEntity(Guid id) : base(id == Guid.Empty ? Guid.NewGuid() : id)
-    {
+    // protected BaseAuditableEntity(Guid id) : base(id == Guid.Empty ? Guid.NewGuid() : id)
+    // {
 
-    }
+    // }
 }

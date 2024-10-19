@@ -1,7 +1,7 @@
 using FluentValidation.Results;
 namespace JobSite.Application.Common.Exceptions;
 
-public class ValidationException : Exception
+public class ValidationException : BaseException
 {
     public ValidationException() : base("One or more validation failures have occurred.")
     {

@@ -1,13 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "+RP4Diln7pI=",
-  "success": false,
+  "dgSpecHash": "tSc+5saPqCQ=",
+  "success": true,
   "projectFilePath": "D:\\projectAndExcercise\\.NET\\JobSite\\src\\JobSite.Api\\JobSite.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vu Thanh Tam\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Vu Thanh Tam\\.nuget\\packages\\fluentvalidation\\11.10.0\\fluentvalidation.11.10.0.nupkg.sha512",
+    "C:\\Users\\Vu Thanh Tam\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.9.2\\fluentvalidation.dependencyinjectionextensions.11.9.2.nupkg.sha512",
     "C:\\Users\\Vu Thanh Tam\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
-    "C:\\Users\\Vu Thanh Tam\\.nuget\\packages\\mediatr\\12.2.0\\mediatr.12.2.0.nupkg.sha512",
+    "C:\\Users\\Vu Thanh Tam\\.nuget\\packages\\mediatr\\12.4.1\\mediatr.12.4.1.nupkg.sha512",
     "C:\\Users\\Vu Thanh Tam\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\Vu Thanh Tam\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.8\\microsoft.aspnetcore.cryptography.internal.8.0.8.nupkg.sha512",
     "C:\\Users\\Vu Thanh Tam\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\8.0.8\\microsoft.aspnetcore.cryptography.keyderivation.8.0.8.nupkg.sha512",
@@ -69,15 +70,5 @@
     "C:\\Users\\Vu Thanh Tam\\.nuget\\packages\\system.text.json\\8.0.4\\system.text.json.8.0.4.nupkg.sha512",
     "C:\\Users\\Vu Thanh Tam\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1605",
-      "level": "Error",
-      "message": "Warning As Error: Detected package downgrade: MediatR from 12.4.1 to 12.2.0. Reference the package directly from the project to select a different version. \r\n JobSite.Api -> JobSite.Application -> JobSite.Domain -> MediatR (>= 12.4.1) \r\n JobSite.Api -> JobSite.Application -> MediatR (>= 12.2.0)",
-      "libraryId": "MediatR",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  "logs": []
 }

@@ -1,3 +1,10 @@
 using System.Net;
+using static JobSite.Application.Common.Models.CustomResponseError;
 namespace JobSite.Application.Common.Exceptions;
-public class ForbiddenException(string errorMessage) : BaseException((int)HttpStatusCode.Forbidden, errorMessage);
+public class ForbiddenException : BaseException
+{
+    public ForbiddenException(string errorMessage) : base(errorMessage)
+    {
+        Code = ErrorCodes.Forbidden;
+    }
+}

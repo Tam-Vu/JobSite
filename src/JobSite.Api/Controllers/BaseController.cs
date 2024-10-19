@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using JobSite.Application;
+// using JobSite.Application.Common.Exceptions;
 
 [ApiController]
 [Authorize]

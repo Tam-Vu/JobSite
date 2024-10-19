@@ -1,0 +1,10 @@
+
+namespace JobSite.Application.Common.Security.Request;
+
+[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+public class AuthorizeableRequest : Attribute
+{
+    public string? Permissions { get; set; }
+    public string? Roles { get; set; }
+    public string? Policies { get; set; }
+}

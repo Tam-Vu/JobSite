@@ -18,15 +18,16 @@ public class Job : BaseAuditableEntity
     public required Guid EmployerId { get; init; }
     public Employer Employer { get; set; } = null!;
 
-    public Job(Guid id, string title, string description, string location, Decimal salary,
-    Guid employerId) : base(id == Guid.Empty ? Guid.NewGuid() : id)
-    {
-        this.Title = title;
-        this.Description = description;
-        this.Location = location;
-        this.Salary = salary;
-        this.JobStatus = JobStatus.Active;
-        this.AppliedResumes = 0;
-        this.EmployerId = employerId;
-    }
+    // public Job(Guid id, string title, string description, string location, Decimal salary, JobType jobType,
+    // Guid employerId) : base(id == Guid.Empty ? Guid.NewGuid() : id)
+    // {
+    //     this.Title = title;
+    //     this.Description = description;
+    //     this.Location = location;
+    //     this.Salary = salary;
+    //     this.JobType = jobType;
+    //     this.JobStatus = JobStatus.Active;
+    //     this.AppliedResumes = 0;
+    //     this.EmployerId = employerId;
+    // }
 }

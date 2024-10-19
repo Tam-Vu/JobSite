@@ -13,14 +13,14 @@ public class Employee : BaseAuditableEntity
     public Account Account { get; set; } = null!;
     public ICollection<Resume> Resumes { get; private set; } = new HashSet<Resume>();
 
-    public Employee(Guid id, string image, string address, string fullname, string phone, string email, Guid accountId)
-        : base(id == Guid.Empty ? Guid.NewGuid() : id)
-    {
-        this.Fullname = fullname;
-        this.Image = image;
-        this.Address = address;
-        this.Phone = phone;
-        this.Email = email;
-        this.AccountId = accountId;
-    }
+    // public Employee(Guid id, string image, string address, string fullname, string phone, string email, Guid accountId)
+    //     : base(id == Guid.Empty ? Guid.NewGuid() : id)
+    // {
+    //     this.Fullname = fullname;
+    //     this.Image = image;
+    //     this.Address = address;
+    //     this.Phone = phone;
+    //     this.Email = email;
+    //     this.AccountId = accountId;
+    // }
 }

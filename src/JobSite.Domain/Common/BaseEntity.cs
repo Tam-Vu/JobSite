@@ -7,10 +7,10 @@ public abstract class BaseEntity
     public Guid Id { get; private init; }
     private readonly List<BaseEvent> _domainEvents = new();
 
-    protected BaseEntity(Guid id)
-    {
-        Id = id;
-    }
+    // protected BaseEntity(Guid id)
+    // {
+    //     Id = id;
+    // }
 
     [NotMapped]
     public IReadOnlyCollection<BaseEvent> DomainEvents => _domainEvents.AsReadOnly();
