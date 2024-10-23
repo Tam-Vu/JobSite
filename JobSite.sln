@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobSite.Api", "src\JobSite.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobSite.Application", "src\JobSite.Application\JobSite.Application.csproj", "{628B5BFE-7517-4913-86BD-450397658DB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobSite.Contracts", "src\JobSite.Contracts\JobSite.Contracts.csproj", "{A2BF321A-81AB-4DE0-B050-858CD75758A7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobSite.Domain", "src\JobSite.Domain\JobSite.Domain.csproj", "{DA2B9FDF-300D-4659-BB3B-A2547E24CA08}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobSite.Infrastructure", "src\JobSite.Infrastructure\JobSite.Infrastructure.csproj", "{D8D7DDBD-4D46-4A51-8735-1F6269F3602C}"

@@ -1,4 +1,6 @@
 
+using JobSite.Application.Common.Models;
+using JobSite.Application.Jobs;
 using JobSite.Application.Jobs.Commands.CreateJob;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -9,11 +11,11 @@ namespace JobSite.Api.Controllers;
 [Route("api/[controller]")]
 public class JobController(ISender _mediator) : ControllerBase
 {
+
     [HttpPost]
-    public async Task<IActionResult> CreateNewJob(CreateJobCommand request)
+    [Route("create-job")]
+    public async Task<JobResponseData> CreateNewJob(CreateJobCommand request, CancellationToken cancellationToken)
     {
-        Console.WriteLine("CreateNewJob");
-        var response = await _mediator.Send(request);
-        return Ok(response);
+        return await _mediator.Send(request, cancellationToken);
     }
 }

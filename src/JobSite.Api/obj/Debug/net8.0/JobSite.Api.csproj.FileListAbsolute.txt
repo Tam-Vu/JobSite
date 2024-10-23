@@ -24,10 +24,8 @@ D:\projectAndExcercise\.NET\JobSite\src\JobSite.Api\bin\Debug\net8.0\Swashbuckle
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Api\bin\Debug\net8.0\JobSite.Application.dll
-D:\projectAndExcercise\.NET\JobSite\src\JobSite.Api\bin\Debug\net8.0\JobSite.Contracts.dll
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Api\bin\Debug\net8.0\JobSite.Domain.dll
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Api\bin\Debug\net8.0\JobSite.Infrastructure.dll
-D:\projectAndExcercise\.NET\JobSite\src\JobSite.Api\bin\Debug\net8.0\JobSite.Contracts.pdb
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Api\bin\Debug\net8.0\JobSite.Application.pdb
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Api\bin\Debug\net8.0\JobSite.Infrastructure.pdb
 D:\projectAndExcercise\.NET\JobSite\src\JobSite.Api\bin\Debug\net8.0\JobSite.Domain.pdb

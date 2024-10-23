@@ -12,6 +12,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Employer> Employers { get; set; }
     public DbSet<Account> Accounts { get; set; }
+    public DbSet<Resume> Resumes { get; set; }
+    public DbSet<Skill> Skills { get; set; }
+    public DbSet<JobApplication> JobApplications { get; set; }
+    public DbSet<InterviewSchedule> interviewSchedules { get; set; }
+    public DbSet<ExperienceDetail> experienceDetails { get; set; }
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
 
@@ -21,5 +26,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        foreach (var entity in builder.Model.GetEntityTypes())
+        {
+            entity.SetTableName(entity.DisplayName());
+        }
     }
 }

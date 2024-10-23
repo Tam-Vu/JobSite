@@ -4,7 +4,7 @@ public class ApplicationConfiguration : IEntityTypeConfiguration<JobApplication>
     public void Configure(EntityTypeBuilder<JobApplication> builder)
     {
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedNever();
+        builder.Property(x => x.Id).ValueGeneratedOnAdd();
         // builder.Property(x => x.status).HasDefaultValue("Pending");
         builder.Property(x => x.JobId).IsRequired();
         builder.Property(x => x.ResumeId).IsRequired();

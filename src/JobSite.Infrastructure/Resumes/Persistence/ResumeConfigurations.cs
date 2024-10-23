@@ -5,7 +5,7 @@ public class ResumeConfiguration : IEntityTypeConfiguration<Resume>
     public void Configure(EntityTypeBuilder<Resume> builder)
     {
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedNever();
+        builder.Property(x => x.Id).ValueGeneratedOnAdd();
         // builder.Property(x => x.title).IsRequired();
         // builder.Property(x => x.experience);
         // builder.Property(x => x.education);
@@ -16,6 +16,16 @@ public class ResumeConfiguration : IEntityTypeConfiguration<Resume>
             .WithMany(x => x.Resumes)
             .HasForeignKey(x => x.EmployeeId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        builder
+            .HasMany(x => x.Skills)
+            .WithMany();
+        // .UsingEntity<Dictionary<string, object>>(
+        //     "ResumeSkill",
+        //     x => x.HasOne<Skill>().WithMany().HasForeignKey("SkillId"),
+        //     x => x.HasOne<Resume>().WithMany().HasForeignKey("ResumeId")
+        // );
+
         // builder
         //     .HasMany(x => x.applications)
         //     .WithOne()

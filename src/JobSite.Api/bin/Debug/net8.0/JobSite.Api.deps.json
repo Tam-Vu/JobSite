@@ -9,7 +9,6 @@
       "JobSite.Api/1.0.0": {
         "dependencies": {
           "JobSite.Application": "1.0.0",
-          "JobSite.Contracts": "1.0.0",
           "JobSite.Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.OpenApi": "8.0.10",
           "Microsoft.EntityFrameworkCore.Design": "8.0.8",
@@ -763,14 +762,6 @@
           }
         }
       },
-      "JobSite.Contracts/1.0.0": {
-        "runtime": {
-          "JobSite.Contracts.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
       "JobSite.Domain/1.0.0": {
         "dependencies": {
           "MediatR": "12.4.1",
@@ -1265,11 +1256,6 @@
       "hashPath": "system.threading.channels.6.0.0.nupkg.sha512"
     },
     "JobSite.Application/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "JobSite.Contracts/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

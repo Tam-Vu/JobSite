@@ -83,12 +83,13 @@ namespace JobSite.Infrastructure.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("ApplicationUser", (string)null);
                 });
 
             modelBuilder.Entity("JobSite.Domain.Entities.Account", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("Address")
@@ -125,12 +126,13 @@ namespace JobSite.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Accounts");
+                    b.ToTable("Account");
                 });
 
             modelBuilder.Entity("JobSite.Domain.Entities.Employee", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("AccountId")
@@ -168,12 +170,13 @@ namespace JobSite.Infrastructure.Migrations
 
                     b.HasIndex("AccountId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employee");
                 });
 
             modelBuilder.Entity("JobSite.Domain.Entities.Employer", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("AccountId")
@@ -211,12 +214,60 @@ namespace JobSite.Infrastructure.Migrations
 
                     b.HasIndex("AccountId");
 
-                    b.ToTable("Employers");
+                    b.ToTable("Employer");
+                });
+
+            modelBuilder.Entity("JobSite.Domain.Entities.ExperienceDetail", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<int>("EndMonth")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EndYear")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset>("LastModified")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("ResumeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("StartMonth")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StartYear")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ResumeId");
+
+                    b.ToTable("ExperienceDetail");
                 });
 
             modelBuilder.Entity("JobSite.Domain.Entities.InterviewSchedule", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTimeOffset>("Created")
@@ -261,10 +312,14 @@ namespace JobSite.Infrastructure.Migrations
             modelBuilder.Entity("JobSite.Domain.Entities.Job", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<int>("AppliedResumes")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Benefit")
+                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("timestamp with time zone");
@@ -293,6 +348,9 @@ namespace JobSite.Infrastructure.Migrations
                     b.Property<string>("Location")
                         .HasColumnType("text");
 
+                    b.Property<string>("Requirement")
+                        .HasColumnType("text");
+
                     b.Property<decimal>("Salary")
                         .HasColumnType("decimal(18,2)");
 
@@ -304,12 +362,13 @@ namespace JobSite.Infrastructure.Migrations
 
                     b.HasIndex("EmployerId");
 
-                    b.ToTable("Jobs");
+                    b.ToTable("Job");
                 });
 
             modelBuilder.Entity("JobSite.Domain.Entities.JobApplication", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTimeOffset>("Created")
@@ -342,44 +401,10 @@ namespace JobSite.Infrastructure.Migrations
                     b.ToTable("JobApplication");
                 });
 
-            modelBuilder.Entity("JobSite.Domain.Entities.Requirement", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("JobId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("JobId");
-
-                    b.ToTable("Requirement");
-                });
-
             modelBuilder.Entity("JobSite.Domain.Entities.Resume", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTimeOffset>("Created")
@@ -420,15 +445,13 @@ namespace JobSite.Infrastructure.Migrations
             modelBuilder.Entity("JobSite.Domain.Entities.Skill", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Description")
                         .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("LastModified")
@@ -441,12 +464,7 @@ namespace JobSite.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("ResumeId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ResumeId");
 
                     b.ToTable("Skill");
                 });
@@ -474,7 +492,7 @@ namespace JobSite.Infrastructure.Migrations
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("IdentityRole", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -499,7 +517,7 @@ namespace JobSite.Infrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
+                    b.ToTable("IdentityRoleClaim<string>", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -524,7 +542,7 @@ namespace JobSite.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
+                    b.ToTable("IdentityUserClaim<string>", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -546,7 +564,7 @@ namespace JobSite.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
+                    b.ToTable("IdentityUserLogin<string>", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -561,7 +579,7 @@ namespace JobSite.Infrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("IdentityUserRole<string>", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -580,7 +598,22 @@ namespace JobSite.Infrastructure.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
+                    b.ToTable("IdentityUserToken<string>", (string)null);
+                });
+
+            modelBuilder.Entity("ResumeSkill", b =>
+                {
+                    b.Property<Guid>("ResumeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SkillsId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("ResumeId", "SkillsId");
+
+                    b.HasIndex("SkillsId");
+
+                    b.ToTable("ResumeSkill (Dictionary<string, object>)");
                 });
 
             modelBuilder.Entity("JobSite.Domain.Entities.Employee", b =>
@@ -603,6 +636,17 @@ namespace JobSite.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Account");
+                });
+
+            modelBuilder.Entity("JobSite.Domain.Entities.ExperienceDetail", b =>
+                {
+                    b.HasOne("JobSite.Domain.Entities.Resume", "Resume")
+                        .WithMany("ExperienceDetails")
+                        .HasForeignKey("ResumeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Resume");
                 });
 
             modelBuilder.Entity("JobSite.Domain.Entities.InterviewSchedule", b =>
@@ -654,17 +698,6 @@ namespace JobSite.Infrastructure.Migrations
                     b.Navigation("Resume");
                 });
 
-            modelBuilder.Entity("JobSite.Domain.Entities.Requirement", b =>
-                {
-                    b.HasOne("JobSite.Domain.Entities.Job", "Job")
-                        .WithMany("Requirements")
-                        .HasForeignKey("JobId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Job");
-                });
-
             modelBuilder.Entity("JobSite.Domain.Entities.Resume", b =>
                 {
                     b.HasOne("JobSite.Domain.Entities.Employee", "Employee")
@@ -674,17 +707,6 @@ namespace JobSite.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("JobSite.Domain.Entities.Skill", b =>
-                {
-                    b.HasOne("JobSite.Domain.Entities.Resume", "Resume")
-                        .WithMany("Skills")
-                        .HasForeignKey("ResumeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Resume");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -738,6 +760,21 @@ namespace JobSite.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ResumeSkill", b =>
+                {
+                    b.HasOne("JobSite.Domain.Entities.Resume", null)
+                        .WithMany()
+                        .HasForeignKey("ResumeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JobSite.Domain.Entities.Skill", null)
+                        .WithMany()
+                        .HasForeignKey("SkillsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("JobSite.Domain.Entities.Employee", b =>
                 {
                     b.Navigation("Resumes");
@@ -753,17 +790,15 @@ namespace JobSite.Infrastructure.Migrations
                     b.Navigation("Applications");
 
                     b.Navigation("InterviewSchedules");
-
-                    b.Navigation("Requirements");
                 });
 
             modelBuilder.Entity("JobSite.Domain.Entities.Resume", b =>
                 {
                     b.Navigation("Applications");
 
-                    b.Navigation("InverviewSchedules");
+                    b.Navigation("ExperienceDetails");
 
-                    b.Navigation("Skills");
+                    b.Navigation("InverviewSchedules");
                 });
 #pragma warning restore 612, 618
         }

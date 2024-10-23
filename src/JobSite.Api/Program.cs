@@ -33,7 +33,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseExceptionHandler();
+app.AddInfrastructureApplication();
 // app.UseHttpsRedirection();
 app.Run();
 

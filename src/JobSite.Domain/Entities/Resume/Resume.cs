@@ -13,6 +13,7 @@ public class Resume : BaseAuditableEntity
     public required Guid EmployeeId { get; init; }
     public Employee Employee { get; set; } = null!;
     public ICollection<Skill> Skills { get; set; } = new HashSet<Skill>();
+    public ICollection<ExperienceDetail> ExperienceDetails { get; set; } = new HashSet<ExperienceDetail>();
     public ICollection<JobApplication> Applications { get; private set; } = new HashSet<JobApplication>();
     public ICollection<InterviewSchedule> InverviewSchedules { get; private set; } = new HashSet<InterviewSchedule>();
     // public Resume(Guid id, string title, string experience, string education, string file, Guid employeeId)

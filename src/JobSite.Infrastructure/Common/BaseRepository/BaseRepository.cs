@@ -22,17 +22,17 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     public async Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
     {
         var entity = await _dbSet.Where(predicate).FirstOrDefaultAsync(cancellationToken);
-        return entity ?? throw new NotFoundException("not found");
+        return entity ?? throw new BadRequestException("not found"); ;
     }
     public async Task<TEntity> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         var entity = await _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
-        return entity ?? throw new NotFoundException("not found");
+        return entity ?? throw new BadRequestException("not found");
     }
 
     public async Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
     {
-        return await _dbSet.Where(predicate).FirstOrDefaultAsync(cancellationToken) ?? throw new NotFoundException("not found");
+        return await _dbSet.Where(predicate).FirstOrDefaultAsync(cancellationToken) ?? throw new BadRequestException("not found");
     }
 
     public async Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, IEnumerable<Expression<Func<TEntity,
@@ -43,7 +43,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         {
             query = query.Include(include);
         }
-        return await query.FirstOrDefaultAsync(cancellationToken) ?? throw new NotFoundException("not found");
+        return await query.FirstOrDefaultAsync(cancellationToken) ?? throw new BadRequestException("not found");
     }
 
     public async Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>,
@@ -51,7 +51,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     {
         var query = _dbSet.Where(predicate);
         query = includeQuery(query);
-        return await query.FirstOrDefaultAsync(cancellationToken) ?? throw new NotFoundException("not found");
+        return await query.FirstOrDefaultAsync(cancellationToken) ?? throw new BadRequestException("not found");
     }
 
     public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)

@@ -1,19 +1,21 @@
+using System.Net;
 using FluentValidation.Results;
 namespace JobSite.Application.Common.Exceptions;
 
-public class ValidationException : BaseException
+public class ValidationsException : BaseException
 {
-    public ValidationException() : base("One or more validation failures have occurred.")
+    public ValidationsException() : base("One or more validation failures have occurred.")
     {
+        Code = (int)HttpStatusCode.BadRequest;
         Errors = new Dictionary<string, string[]>();
     }
 
-    public ValidationException(IEnumerable<ValidationFailure> failures) : this()
+    public ValidationsException(IEnumerable<ValidationFailure> failures) : this()
     {
         Errors = failures
             .GroupBy(e => e.PropertyName, e => e.ErrorMessage)
-            .ToDictionary(FailureGroup => FailureGroup.Key, FailureGroup => FailureGroup.ToArray());
+            .ToDictionary(failureGroup => failureGroup.Key, failureGroup => failureGroup.ToArray());
     }
 
-    public Dictionary<string, string[]> Errors { get; }
+    public IDictionary<string, string[]> Errors { get; }
 }

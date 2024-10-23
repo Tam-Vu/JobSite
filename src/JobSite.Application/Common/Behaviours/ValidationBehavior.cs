@@ -1,4 +1,4 @@
-using ValidationException = JobSite.Application.Common.Exceptions.ValidationException;
+using JobSite.Application.Common.Exceptions;
 
 namespace JobSite.Application.Common.Behaviours;
 
@@ -15,17 +15,19 @@ public class ValidationBahaviour<TRequest, TResponse> : IPipelineBehavior<TReque
         if (_validators.Any())
         {
             var context = new ValidationContext<TRequest>(request);
-            var validatorResults = await Task.WhenAll(
-                _validators.Select(v => v.ValidateAsync(context, cancellationToken)));
 
-            var failures = validatorResults
+            var validationResults = await Task.WhenAll(
+                _validators.Select(v =>
+                    v.ValidateAsync(context, cancellationToken)));
+
+            var failures = validationResults
                 .Where(e => e.Errors.Any())
                 .SelectMany(e => e.Errors)
                 .ToList();
 
             if (failures.Any())
             {
-                throw new ValidationException(failures);
+                throw new ValidationsException(failures);
             }
         }
         return await next();
