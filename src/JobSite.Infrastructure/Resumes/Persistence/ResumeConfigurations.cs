@@ -5,6 +5,7 @@ public class ResumeConfiguration : IEntityTypeConfiguration<Resume>
     public void Configure(EntityTypeBuilder<Resume> builder)
     {
         builder.HasKey(x => x.Id);
+        builder.ToTable("Resumes");
         builder.Property(x => x.Id).ValueGeneratedOnAdd();
         // builder.Property(x => x.title).IsRequired();
         // builder.Property(x => x.experience);

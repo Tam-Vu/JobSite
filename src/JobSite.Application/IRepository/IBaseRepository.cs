@@ -29,6 +29,8 @@ public interface IBaseRepository<TEntity> where TEntity : BaseEntity
 
     Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
 
+    Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken);
+
     Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, IEnumerable<Expression<Func<TEntity,
         BaseEntity>>> includes, CancellationToken cancellationToken);
     Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>,

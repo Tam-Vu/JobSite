@@ -11,23 +11,33 @@ public class SkillController(ISender _mediator) : ControllerBase
 {
 
     [HttpPost]
-    [Route("create-skill")]
+    [Route("")]
+
     public async Task<string> CreateNewSkill(CreateSkillCommand request, CancellationToken cancellationToken)
     {
         return await _mediator.Send(request, cancellationToken);
     }
 
     [HttpPut]
-    [Route("update-skill")]
+    [Route("")]
     public async Task<string> UpdateSkill(UpdateSkillCommand request, CancellationToken cancellationToken)
     {
         return await _mediator.Send(request, cancellationToken);
     }
 
     [HttpDelete]
-    [Route("delete-skill")]
-    public async Task<string> DeleteSkill(DeleteSkillCommand request, CancellationToken cancellationToken)
+    [Route("{id}")]
+    public async Task<string> DeleteSkill(Guid id, CancellationToken cancellationToken)
     {
+        var request = new DeleteSkillCommand(id);
+        return await _mediator.Send(request, cancellationToken);
+    }
+
+    [HttpGet]
+    [Route("")]
+    public async Task<List<SkillResponseData>> GetListSkill(CancellationToken cancellationToken)
+    {
+        var request = new GetListSkillQuery();
         return await _mediator.Send(request, cancellationToken);
     }
 }

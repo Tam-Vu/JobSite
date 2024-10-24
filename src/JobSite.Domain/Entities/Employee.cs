@@ -1,4 +1,5 @@
 using JobSite.Domain.Common;
+using Microsoft.AspNetCore.Identity;
 
 namespace JobSite.Domain.Entities;
 
@@ -7,8 +8,6 @@ public class Employee : BaseAuditableEntity
     public required string Fullname { get; set; }
     public string? Image { get; set; }
     public string? Address { get; set; }
-    public string? Phone { get; set; }
-    public string? Email { get; set; }
     public required Guid AccountId { get; init; }
     public Account Account { get; set; } = null!;
     public ICollection<Resume> Resumes { get; private set; } = new HashSet<Resume>();
