@@ -1,36 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "D:\\projectAndExcercise\\.NET\\JobSite\\src\\JobSite.Infrastructure\\JobSite.Infrastructure.csproj": {}
+    "/Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Infrastructure/JobSite.Infrastructure.csproj": {}
   },
   "projects": {
-    "D:\\projectAndExcercise\\.NET\\JobSite\\src\\JobSite.Application\\JobSite.Application.csproj": {
+    "/Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Application/JobSite.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\projectAndExcercise\\.NET\\JobSite\\src\\JobSite.Application\\JobSite.Application.csproj",
+        "projectUniqueName": "/Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Application/JobSite.Application.csproj",
         "projectName": "JobSite.Application",
-        "projectPath": "D:\\projectAndExcercise\\.NET\\JobSite\\src\\JobSite.Application\\JobSite.Application.csproj",
-        "packagesPath": "C:\\Users\\Vu Thanh Tam\\.nuget\\packages\\",
-        "outputPath": "D:\\projectAndExcercise\\.NET\\JobSite\\src\\JobSite.Application\\obj\\",
+        "projectPath": "/Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Application/JobSite.Application.csproj",
+        "packagesPath": "/Users/vuthanhnhan/.nuget/packages/",
+        "outputPath": "/Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Vu Thanh Tam\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/vuthanhnhan/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\projectAndExcercise\\.NET\\JobSite\\src\\JobSite.Domain\\JobSite.Domain.csproj": {
-                "projectPath": "D:\\projectAndExcercise\\.NET\\JobSite\\src\\JobSite.Domain\\JobSite.Domain.csproj"
+              "/Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Domain/JobSite.Domain.csproj": {
+                "projectPath": "/Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Domain/JobSite.Domain.csproj"
               }
             }
           }
@@ -90,29 +87,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\projectAndExcercise\\.NET\\JobSite\\src\\JobSite.Domain\\JobSite.Domain.csproj": {
+    "/Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Domain/JobSite.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\projectAndExcercise\\.NET\\JobSite\\src\\JobSite.Domain\\JobSite.Domain.csproj",
+        "projectUniqueName": "/Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Domain/JobSite.Domain.csproj",
         "projectName": "JobSite.Domain",
-        "projectPath": "D:\\projectAndExcercise\\.NET\\JobSite\\src\\JobSite.Domain\\JobSite.Domain.csproj",
-        "packagesPath": "C:\\Users\\Vu Thanh Tam\\.nuget\\packages\\",
-        "outputPath": "D:\\projectAndExcercise\\.NET\\JobSite\\src\\JobSite.Domain\\obj\\",
+        "projectPath": "/Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Domain/JobSite.Domain.csproj",
+        "packagesPath": "/Users/vuthanhnhan/.nuget/packages/",
+        "outputPath": "/Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Vu Thanh Tam\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/vuthanhnhan/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -161,37 +155,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\projectAndExcercise\\.NET\\JobSite\\src\\JobSite.Infrastructure\\JobSite.Infrastructure.csproj": {
+    "/Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Infrastructure/JobSite.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\projectAndExcercise\\.NET\\JobSite\\src\\JobSite.Infrastructure\\JobSite.Infrastructure.csproj",
+        "projectUniqueName": "/Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Infrastructure/JobSite.Infrastructure.csproj",
         "projectName": "JobSite.Infrastructure",
-        "projectPath": "D:\\projectAndExcercise\\.NET\\JobSite\\src\\JobSite.Infrastructure\\JobSite.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\Vu Thanh Tam\\.nuget\\packages\\",
-        "outputPath": "D:\\projectAndExcercise\\.NET\\JobSite\\src\\JobSite.Infrastructure\\obj\\",
+        "projectPath": "/Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Infrastructure/JobSite.Infrastructure.csproj",
+        "packagesPath": "/Users/vuthanhnhan/.nuget/packages/",
+        "outputPath": "/Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Vu Thanh Tam\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/vuthanhnhan/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\projectAndExcercise\\.NET\\JobSite\\src\\JobSite.Application\\JobSite.Application.csproj": {
-                "projectPath": "D:\\projectAndExcercise\\.NET\\JobSite\\src\\JobSite.Application\\JobSite.Application.csproj"
+              "/Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Application/JobSite.Application.csproj": {
+                "projectPath": "/Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Application/JobSite.Application.csproj"
               }
             }
           }
@@ -265,7 +256,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
