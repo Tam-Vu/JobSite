@@ -11,8 +11,11 @@ public interface IBaseRepository<TEntity> where TEntity : BaseEntity
     //Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> sort: a function that takes a IQueryable<TEntity> 
     //and returns a IOrderedQueryable<TEntity>
 
-    //IEnumerable<Expression<Func<TEntity, BaseEntity>>> includes: a collection of expressions that represents a lambda function that takes a TEntity 
-    //and returns a BaseEntity
+    //IEnumerable<Expression<Func<TEntity, BaseEntity>>> includes: a collection of expressions that represents a lambda function that takes  
+    //a TEntity and returns a BaseEntity 
+
+    //Func<IQueryable<TEntity>,IIncludableQueryable<TEntity, object>> includeQuery: a function that takes a IQueryable<TEntity>
+    //and returns a IIncludableQueryable<TEntity, object>
 
     IQueryable<TEntity> GetQuery();
     Task<TEntity> GetByIdAsync(Guid id, CancellationToken cancellationToken);
