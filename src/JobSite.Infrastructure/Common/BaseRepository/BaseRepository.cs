@@ -54,6 +54,11 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         return await query.FirstOrDefaultAsync(cancellationToken) ?? throw new BadRequestException("not found");
     }
 
+    public Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken)
+    {
+        return _dbSet.ToListAsync(cancellationToken);
+    }
+
     public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
     {
         return await _dbSet.Where(predicate).ToListAsync();

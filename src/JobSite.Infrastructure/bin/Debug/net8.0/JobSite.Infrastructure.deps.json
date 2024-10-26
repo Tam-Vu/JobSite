@@ -711,6 +711,7 @@
       "JobSite.Domain/1.0.0": {
         "dependencies": {
           "MediatR": "12.4.1",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.8",
           "Microsoft.EntityFrameworkCore.Abstractions": "8.0.10"
         },
         "runtime": {

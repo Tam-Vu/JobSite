@@ -6,6 +6,6 @@ public class CreateSkillCommandValidator : AbstractValidator<CreateSkillCommand>
     {
         RuleFor(v => v.Name)
             .MaximumLength(200)
-            .NotEmpty();
+            .NotEmpty().WithMessage("Skill name could not be empty");
     }
 }

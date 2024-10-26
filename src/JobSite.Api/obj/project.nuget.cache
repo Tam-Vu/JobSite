@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "6mr2wdvYYM4=",
+  "dgSpecHash": "q0Wx992TOSA=",
   "success": true,
   "projectFilePath": "/Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Api/JobSite.Api.csproj",
   "expectedPackageFiles": [
@@ -70,5 +70,12 @@
     "/Users/vuthanhnhan/.nuget/packages/system.text.json/8.0.4/system.text.json.8.0.4.nupkg.sha512",
     "/Users/vuthanhnhan/.nuget/packages/system.threading.channels/6.0.0/system.threading.channels.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file /Users/vuthanhnhan/Desktop/project/JobSite/src/JobSite.Api/obj/project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

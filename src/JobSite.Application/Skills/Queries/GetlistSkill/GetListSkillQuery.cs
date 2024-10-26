@@ -1,0 +1,1 @@
+public record GetListSkillQuery() : IRequest<List<SkillResponseData>>;

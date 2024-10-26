@@ -26,7 +26,7 @@ public static class EntityFrameworkRegisteration
         {
             //add interceptors here
 
-            options.UseNpgsql(@"Host=localhost;Username=postgres;Password=12345;Database=JobSite", opt =>
+            options.UseNpgsql(@"Host=localhost;Username=postgres;Password=12345;Database=jobsite", opt =>
             {
                 opt.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
             });
