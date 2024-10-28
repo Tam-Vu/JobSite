@@ -9,13 +9,11 @@ namespace JobSite.Application.Accounts.Commands.CreateAccount;
 public class CreateAccountHandler : IRequestHandler<CreateAccountCommand, string>
 {
     private readonly IAccountRepository _accountRepository;
-    private readonly PasswordHasher<Account> _hashingService;
     private readonly UserManager<Account> _userManager;
-    public CreateAccountHandler(IAccountRepository accountRepository, UserManager<Account> userManager, PasswordHasher<Account> hashingService)
+    public CreateAccountHandler(IAccountRepository accountRepository, UserManager<Account> userManager)
     {
         _accountRepository = accountRepository;
         _userManager = userManager;
-        _hashingService = hashingService;
     }
     public async Task<string> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
     {
@@ -29,7 +27,6 @@ public class CreateAccountHandler : IRequestHandler<CreateAccountCommand, string
         {
             throw new BadRequestException($"Email {request.Email} is already taken");
         }
-        var hassedPassword = _hashingService.HashPassword(null, request.Password);
         var newAccount = new Account
         {
             UserName = request.UserName,

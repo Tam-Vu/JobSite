@@ -1,11 +1,12 @@
 
 using System.Reflection;
+using JobSite.Domain.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace JobSite.Infrastructure.Common.Persistence;
-public class ApplicationDbContext : IdentityDbContext<Account, IdentityRole<Guid>, Guid>
+public class ApplicationDbContext : IdentityDbContext<Account, UserRole, Guid>
 {
     public DbSet<Job> Jobs { get; set; }
     public DbSet<Employee> Employees { get; set; }
