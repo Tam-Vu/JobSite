@@ -3,6 +3,9 @@ using JobSite.Application;
 using JobSite.Api;
 var builder = WebApplication.CreateBuilder(args);
 {
+    builder.AddApplicationBuilder()
+        .AddInfrastructureBuilder();
+
     builder.Services.AddEndpointsApiExplorer()
         .AddSwaggerGen()
         .AddInfrastructureService(builder.Configuration)
@@ -17,9 +20,6 @@ var builder = WebApplication.CreateBuilder(args);
                     .WithOrigins("http://localhost:3000");
             });
         });
-
-    builder.AddApplicationBuilder()
-        .AddInfrastructureBuilder();
 }
 
 // Add services to the container.

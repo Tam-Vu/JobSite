@@ -5,8 +5,8 @@
 # dotenv files
 .env
 # Ignore appsettings.json changes
-src/JobSite/appsettings.json
-secrets.json
+src/JobSite.Api/appsettings.Development.json
+src/JobSite.Api/appsettings.json
 /build/
 _ReSharper.*/
 bin/

@@ -1,3 +1,4 @@
+using System.Net.Mail;
 using JobSite.Domain.Identity;
 using JobSite.Infrastructure.Accounts.Persistence;
 using JobSite.Infrastructure.Common.Middleware;
@@ -23,12 +24,28 @@ public static class DependencyInjection
         return builder;
     }
 
+    private static void AddEmailConfig(this IServiceCollection services, IConfiguration configuration)
+    {
+        var emailConfig = new EmailSenderSetting();
+        configuration.GetSection(EmailSenderSetting.EmailSettingConfig).Bind(emailConfig);
+        services
+            .AddFluentEmail(emailConfig.Username)
+            .AddSmtpSender(new SmtpClient(emailConfig.Server)
+            {
+                Port = emailConfig.Port,
+                Credentials = new System.Net.NetworkCredential(emailConfig.Username, emailConfig.Password),
+                EnableSsl = emailConfig.EnableSsl
+            });
+    }
+
     public static IServiceCollection AddInfrastructureService(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddIdentity();
+        AddEmailConfig(services, configuration);
         services.AddScoped<IJobRepository, JobRepository>();
         services.AddScoped<ISkillRepository, SkillRepository>();
         services.AddScoped<IAccountRepository, AccountRepository>();
+        services.AddScoped<IEmailSenderRepository, EmailSenderRepository>();
         services.AddProblemDetails();
         return services;
     }

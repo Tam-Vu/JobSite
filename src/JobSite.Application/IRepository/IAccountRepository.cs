@@ -1,7 +1,5 @@
 using System.Linq.Expressions;
 using JobSite.Domain.Common;
-using JobSite.Domain.Entities;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Query;
 
 namespace JobSite.Application.IRepository;
