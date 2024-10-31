@@ -1,6 +1,6 @@
 
+using System.Web;
 using JobSite.Application.Common.Exceptions;
-using JobSite.Application.Common.Interfaces;
 using JobSite.Application.IRepository;
 using Microsoft.AspNetCore.Identity;
 
@@ -37,8 +37,12 @@ public class CreateAccountHandler : IRequestHandler<CreateAccountCommand, string
             PhoneNumber = request.PhoneNumber,
             SecurityStamp = Guid.NewGuid().ToString()
         };
-        var token = await _userManager.GenerateEmailConfirmationTokenAsync(newAccount);
         var result = await _userManager.CreateAsync(newAccount, request.Password);
+        if (!result.Succeeded)
+        {
+            throw new BadRequestException($"Create account failed: {result.Errors}");
+        }
+        var token = await _userManager.GenerateEmailConfirmationTokenAsync(newAccount);
         await _emailSenderRepository.SendEmailConfirmationAsync(newAccount.Email, token, cancellationToken);
         return "create account success with id: " + newAccount.UserName;
     }
