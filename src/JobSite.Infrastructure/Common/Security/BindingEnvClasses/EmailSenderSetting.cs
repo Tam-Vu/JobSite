@@ -1,3 +1,4 @@
+namespace JobSite.Infrastructure.Common.Security.BindingEnvClasses;
 public sealed class EmailSenderSetting
 {
     public const string EmailSettingConfig = "EmailSenderSettings";

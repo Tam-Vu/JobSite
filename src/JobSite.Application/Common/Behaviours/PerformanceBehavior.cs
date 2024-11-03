@@ -2,7 +2,7 @@
 
 
 using System.Diagnostics;
-using JobSite.Application.Common.Interfaces;
+using JobSite.Application.Common.Security.Identity;
 using Microsoft.Extensions.Logging;
 
 namespace JobSite.Application.Common.Behaviours;

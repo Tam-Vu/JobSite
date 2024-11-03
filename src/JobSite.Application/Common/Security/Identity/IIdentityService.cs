@@ -1,4 +1,4 @@
-namespace JobSite.Application.Common.Interfaces;
+namespace JobSite.Application.Common.Security.Identity;
 public interface IIdentityService
 {
     Task<string?> GetUserNameAsync(string userId);

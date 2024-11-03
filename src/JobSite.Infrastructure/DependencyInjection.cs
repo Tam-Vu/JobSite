@@ -3,12 +3,12 @@ using JobSite.Domain.Identity;
 using JobSite.Infrastructure.Accounts.Persistence;
 using JobSite.Infrastructure.Common.Middleware;
 using JobSite.Infrastructure.Common.Persistence;
+using JobSite.Infrastructure.Common.Security.BindingEnvClasses;
 using JobSite.Infrastructure.EntityFrameworkCore;
 using JobSite.Infrastructure.Jobs.Persistence;
 using JobSite.Infrastructure.Resumes.Skills;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -42,6 +42,7 @@ public static class DependencyInjection
     {
         services.AddIdentity();
         AddEmailConfig(services, configuration);
+        services.AddSingleton(TimeProvider.System);
         services.AddScoped<IJobRepository, JobRepository>();
         services.AddScoped<ISkillRepository, SkillRepository>();
         services.AddScoped<IAccountRepository, AccountRepository>();

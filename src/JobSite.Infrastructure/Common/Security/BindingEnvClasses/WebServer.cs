@@ -1,4 +1,4 @@
-namespace JobSite.Infrastructure.Security.BindingEnvClasses;
+namespace JobSite.Infrastructure.Common.Security.BindingEnvClasses;
 public sealed class WebServer
 {
     public const string webServer = "WebServer";

@@ -2,7 +2,7 @@
 
 using System.Reflection;
 using JobSite.Application.Common.Exceptions;
-using JobSite.Application.Common.Interfaces;
+using JobSite.Application.Common.Security.Identity;
 using Microsoft.AspNetCore.Authorization;
 
 namespace JobSite.Application.Common.Behaviours;

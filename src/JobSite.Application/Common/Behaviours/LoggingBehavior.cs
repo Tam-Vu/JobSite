@@ -1,4 +1,4 @@
-using JobSite.Application.Common.Interfaces;
+using JobSite.Application.Common.Security.Identity;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
 

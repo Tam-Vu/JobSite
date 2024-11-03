@@ -2,15 +2,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JobSite.Domain.Common;
 
-public abstract class BaseEntity
+public abstract class BaseEntity : IHasDomainEvents
 {
     public Guid Id { get; set; }
     private readonly List<BaseEvent> _domainEvents = new();
-
-    // protected BaseEntity(Guid id)
-    // {
-    //     Id = id;
-    // }
 
     [NotMapped]
     public IReadOnlyCollection<BaseEvent> DomainEvents => _domainEvents.AsReadOnly();

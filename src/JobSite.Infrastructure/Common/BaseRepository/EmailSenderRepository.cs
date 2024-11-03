@@ -1,7 +1,6 @@
 using FluentEmail.Core;
 using JobSite.Application.Common.Models;
-using JobSite.Infrastructure.Security.BindingEnvClasses;
-using Microsoft.Extensions.Configuration;
+using JobSite.Infrastructure.Common.Security.BindingEnvClasses;
 namespace JobSite.Infrastructure.Common.BaseRepository;
 public class EmailSenderRepository : IEmailSenderRepository
 {

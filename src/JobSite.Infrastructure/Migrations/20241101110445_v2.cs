@@ -94,14 +94,6 @@ namespace JobSite.Infrastructure.Migrations
                 table: "Employees");
 
             migrationBuilder.DropColumn(
-                name: "Created",
-                table: "Accounts");
-
-            migrationBuilder.DropColumn(
-                name: "LastModified",
-                table: "Accounts");
-
-            migrationBuilder.DropColumn(
                 name: "Password",
                 table: "Accounts");
 
@@ -265,20 +257,6 @@ namespace JobSite.Infrastructure.Migrations
                 column: "Id");
 
             migrationBuilder.CreateTable(
-                name: "IdentityRole<Guid>",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_IdentityRole<Guid>", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "IdentityUserClaim<Guid>",
                 columns: table => new
                 {
@@ -340,6 +318,20 @@ namespace JobSite.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserRole",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRole", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "IdentityRoleClaim<Guid>",
                 columns: table => new
                 {
@@ -353,9 +345,9 @@ namespace JobSite.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_IdentityRoleClaim<Guid>", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_IdentityRoleClaim<Guid>_IdentityRole<Guid>_RoleId",
+                        name: "FK_IdentityRoleClaim<Guid>_UserRole_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "IdentityRole<Guid>",
+                        principalTable: "UserRole",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -377,9 +369,9 @@ namespace JobSite.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_IdentityUserRole<Guid>_IdentityRole<Guid>_RoleId",
+                        name: "FK_IdentityUserRole<Guid>_UserRole_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "IdentityRole<Guid>",
+                        principalTable: "UserRole",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -393,12 +385,6 @@ namespace JobSite.Infrastructure.Migrations
                 name: "UserNameIndex",
                 table: "Account",
                 column: "NormalizedUserName",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "RoleNameIndex",
-                table: "IdentityRole<Guid>",
-                column: "NormalizedName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -420,6 +406,12 @@ namespace JobSite.Infrastructure.Migrations
                 name: "IX_IdentityUserRole<Guid>_RoleId",
                 table: "IdentityUserRole<Guid>",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "UserRole",
+                column: "NormalizedName",
+                unique: true);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Employee_Account_AccountId",
@@ -537,7 +529,7 @@ namespace JobSite.Infrastructure.Migrations
                 name: "IdentityUserToken<Guid>");
 
             migrationBuilder.DropTable(
-                name: "IdentityRole<Guid>");
+                name: "UserRole");
 
             migrationBuilder.DropPrimaryKey(
                 name: "PK_ResumeSkill (Dictionary<string, object>)",
@@ -691,20 +683,6 @@ namespace JobSite.Infrastructure.Migrations
                 oldType: "character varying(256)",
                 oldMaxLength: 256,
                 oldNullable: true);
-
-            migrationBuilder.AddColumn<DateTimeOffset>(
-                name: "Created",
-                table: "Accounts",
-                type: "timestamp with time zone",
-                nullable: false,
-                defaultValue: new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)));
-
-            migrationBuilder.AddColumn<DateTimeOffset>(
-                name: "LastModified",
-                table: "Accounts",
-                type: "timestamp with time zone",
-                nullable: false,
-                defaultValue: new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)));
 
             migrationBuilder.AddColumn<string>(
                 name: "Password",
