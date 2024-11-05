@@ -10,16 +10,12 @@ namespace JobSite.Application.Accounts.Commands.CreateAccount;
 
 public class CreateAccountHandler : IRequestHandler<CreateAccountCommand, string>
 {
-    private readonly IAccountRepository _accountRepository;
     private readonly UserManager<Account> _userManager;
     private readonly IEmailSenderRepository _emailSenderRepository;
-    private readonly IApplicationDbContext _context;
-    public CreateAccountHandler(IAccountRepository accountRepository, UserManager<Account> userManager, IEmailSenderRepository emailSenderRepository, IApplicationDbContext context)
+    public CreateAccountHandler(UserManager<Account> userManager, IEmailSenderRepository emailSenderRepository)
     {
-        _accountRepository = accountRepository;
         _userManager = userManager;
         _emailSenderRepository = emailSenderRepository;
-        _context = context;
     }
     public async Task<string> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
     {

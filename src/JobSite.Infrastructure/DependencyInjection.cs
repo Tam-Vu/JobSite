@@ -1,9 +1,14 @@
 using System.Net.Mail;
+using System.Security.Principal;
+using JobSite.Application.Common.Security.Identity;
+using JobSite.Application.Common.Security.Jwt;
 using JobSite.Domain.Identity;
 using JobSite.Infrastructure.Accounts.Persistence;
 using JobSite.Infrastructure.Common.Middleware;
 using JobSite.Infrastructure.Common.Persistence;
 using JobSite.Infrastructure.Common.Security.BindingEnvClasses;
+using JobSite.Infrastructure.Common.Security.Identity;
+using JobSite.Infrastructure.Common.Security.Jwt;
 using JobSite.Infrastructure.EntityFrameworkCore;
 using JobSite.Infrastructure.Jobs.Persistence;
 using JobSite.Infrastructure.Resumes.Skills;
@@ -21,6 +26,9 @@ public static class DependencyInjection
         builder
             .AddEntityFramewordCore();
         //add caching here
+
+        // .AddAppAuthorization()
+        // builder.Services.AddInfrastructureService();
         return builder;
     }
 
@@ -47,6 +55,8 @@ public static class DependencyInjection
         services.AddScoped<ISkillRepository, SkillRepository>();
         services.AddScoped<IAccountRepository, AccountRepository>();
         services.AddScoped<IEmailSenderRepository, EmailSenderRepository>();
+        services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IIdentityService, IdentitySerivce>();
         services.AddProblemDetails();
         return services;
     }
