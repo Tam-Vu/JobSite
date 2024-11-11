@@ -20,9 +20,10 @@ public class TokenService : ITokenService
         var key = Encoding.ASCII.GetBytes(_jwtConfig.Secret);
         var claims = new List<Claim>
         {
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            // new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim(ClaimTypes.NameIdentifier, account.Id.ToString()),
-            new Claim(ClaimTypes.Name, account.UserName)
+            new Claim(ClaimTypes.Name, account.UserName),
+            new Claim(ClaimTypes.Email, account.Email)
         };
         var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -52,10 +53,12 @@ public class TokenService : ITokenService
         var tokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
+            ValidateLifetime = true,
+            ValidateAudience = true,
+            ValidateIssuer = true,
             ValidAudience = _jwtConfig.Audience,
             ValidIssuer = _jwtConfig.Issuer,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtConfig.Secret)),
-            ValidateLifetime = false
         };
 
         var tokenHandler = new JwtSecurityTokenHandler();

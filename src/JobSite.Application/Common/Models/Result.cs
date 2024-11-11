@@ -23,17 +23,12 @@ public class Result<T>
 
     public static Result<T> Success(T data)
     {
-        return new Result<T>(true, data, null);
+        return new Result<T>(true, data, new List<ResultError>());
     }
 
     public static Result<T> Fail(IEnumerable<ResultError> errors)
     {
-        return new Result<T>(false, default, errors);
-    }
-
-    public static object? Success(JobResponseData response)
-    {
-        throw new NotImplementedException();
+        return new Result<T>(false, default!, errors);
     }
 }
 
@@ -48,15 +43,15 @@ public class ResultError
         Message = message;
     }
 
-    public enum ErrorCodes
-    {
-        NotFound,
-        Invalid,
-        Unauthorized,
-        Forbidden,
-        Conflict,
-        InternalServerError,
-        PermissionValidation,
-        BadRequest
-    }
+}
+public enum ErrorCodes
+{
+    NotFound,
+    Invalid,
+    Unauthorized,
+    Forbidden,
+    Conflict,
+    InternalServerError,
+    PermissionValidation,
+    BadRequest
 }

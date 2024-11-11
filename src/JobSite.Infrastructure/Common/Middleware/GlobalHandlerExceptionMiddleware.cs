@@ -54,7 +54,7 @@ public class GlobalHandlerExceptionMiddleware
                 problemDetails = new ProblemDetails
                 {
                     Status = baseException.Code,
-                    Detail = baseException.ErrorMessage,
+                    Detail = baseException.Message,
                 };
             }
         }

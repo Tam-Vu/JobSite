@@ -1,6 +1,7 @@
 
 using System.Security.Claims;
 using JobSite.Application.Common.Security.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace JobSite.Api.Services;
 public class CurrentUser : IUser
@@ -10,9 +11,9 @@ public class CurrentUser : IUser
     {
         _httpContextAccessor = httpContextAccessor;
     }
-    public string? Id => this.GetClaim(ClaimTypes.NameIdentifier);
+    // public string? Id => this.GetClaim(ClaimTypes.NameIdentifier);
     //if this not work, try this
-    //public string? Id => _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+    public string? Id => _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
 
     public string GetUserName() => this.GetClaim(ClaimTypes.Name);
 

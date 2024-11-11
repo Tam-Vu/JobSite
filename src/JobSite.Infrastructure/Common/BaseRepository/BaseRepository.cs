@@ -17,6 +17,18 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         _dbContext = dbContext;
         _dbSet = dbContext.Set<TEntity>();
     }
+
+    //Expression<Func<TEntity, bool>> predicate: a expression that represents a lambda function that takes a TEntity and returns a bool
+
+    //Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> sort: a function that takes a IQueryable<TEntity> 
+    //and returns a IOrderedQueryable<TEntity>
+
+    //IEnumerable<Expression<Func<TEntity, BaseEntity>>> includes: a collection of expressions that represents a lambda function that takes  
+    //a TEntity and returns a BaseEntity 
+
+    //Func<IQueryable<TEntity>,IIncludableQueryable<TEntity, object>> includeQuery: a function that takes a IQueryable<TEntity>
+    //and returns a IIncludableQueryable<TEntity, object>
+
     public IQueryable<TEntity> GetQuery() => this._dbSet;
 
     public async Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
@@ -27,6 +39,17 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     public async Task<TEntity> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         var entity = await _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        return entity ?? throw new BadRequestException($"not found {nameof(TEntity)}"); ;
+    }
+
+    public async Task<TEntity> GetByIdAsync(Guid id, IEnumerable<Expression<Func<TEntity, BaseEntity>>> includes, CancellationToken cancellationToken)
+    {
+        var query = _dbSet.AsQueryable();
+        foreach (var include in includes)
+        {
+            query = query.Include(include);
+        }
+        var entity = await query.SingleAsync(x => x.Id == id, cancellationToken);
         return entity ?? throw new BadRequestException($"not found {nameof(TEntity)}"); ;
     }
 

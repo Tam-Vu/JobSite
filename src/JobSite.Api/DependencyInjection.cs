@@ -28,10 +28,10 @@ public static class DependencyInjection
         services.AddSingleton(jwtConfig);
         var key = Encoding.ASCII.GetBytes(jwtConfig.Secret);
 
-        services.AddAuthentication(x =>
+        services.AddAuthentication(options =>
             {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(x =>
             {
                 x.RequireHttpsMetadata = false;
@@ -39,60 +39,59 @@ public static class DependencyInjection
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidIssuer = jwtConfig.Issuer,
                     ValidAudience = jwtConfig.Audience,
-                    ValidateLifetime = true,
                 };
             });
         return builder;
     }
 
-    private static WebApplicationBuilder AddSwagger(this WebApplicationBuilder builder)
+    public static WebApplicationBuilder AddSwagger(this WebApplicationBuilder builder)
     {
         var configuration = builder.Configuration;
         var services = builder.Services;
 
-        services.AddSwaggerGen(options =>
+        services.AddSwaggerGen(option =>
         {
-            options.SwaggerDoc("v1", new OpenApiInfo
+            option.SwaggerDoc("v1", new OpenApiInfo
             {
-                Title = "JobSite",
                 Version = "v1",
-
+                Title = "ChitChat API",
             });
 
-            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
-                Description = "JWT Authorization header using the Bearer scheme",
+                Description = "JWT Authorization header using the Bearer scheme (Example: 'Bearer YOUR_TOKEN')",
                 Name = "Authorization",
                 In = ParameterLocation.Header,
                 Type = SecuritySchemeType.ApiKey,
                 Scheme = "Bearer"
             });
-
-            options.AddSecurityRequirement(new OpenApiSecurityRequirement
+            option.AddSecurityRequirement(new OpenApiSecurityRequirement
             {
-                {
-                    new OpenApiSecurityScheme
                     {
-                        Reference = new OpenApiReference
+                        new OpenApiSecurityScheme
                         {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
-                    },
-                    new string[] { }
-                }
+                            Reference= new OpenApiReference
+                            {
+                                Type=ReferenceType.SecurityScheme,
+                                Id=JwtBearerDefaults.AuthenticationScheme
+                            }
+                        }, new string[]{}
+                    }
             });
-            options.CustomSchemaIds(type => type.ToString());
+            option.CustomSchemaIds(type => type.ToString());
+
         });
         return builder;
     }
     public static IServiceCollection AddPresentationService(this IServiceCollection services)
     {
         AddAuthServices(services);
-        services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
         return services;
@@ -102,5 +101,6 @@ public static class DependencyInjection
     {
         //must add current user for infrastructure to use (it will be error if not added) 
         services.AddScoped<IUser, CurrentUser>();
+        // services.AddHttpContextAccessor();
     }
 }
