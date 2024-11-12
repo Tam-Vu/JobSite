@@ -3,7 +3,7 @@ using JobSite.Application.IRepository;
 
 namespace JobSite.Application.Employees.Queries.GetSingleEmployee;
 
-public class GetSingleEmployeeHandler : IRequestHandler<GetSingleEmployeeQuery, GetSingleEmployeeResponse>
+public class GetSingleEmployeeHandler : IRequestHandler<GetSingleEmployeeQuery, GetSingleEmployeeQuery>
 {
     private readonly IEmployeeRepository _employeeRepository;
 
@@ -12,9 +12,9 @@ public class GetSingleEmployeeHandler : IRequestHandler<GetSingleEmployeeQuery, 
         _employeeRepository = employeeRepository;
     }
 
-    public async Task<GetSingleEmployeeResponse> Handle(GetSingleEmployeeQuery request, CancellationToken cancellationToken)
+    async Task<GetSingleEmployeeQuery> IRequestHandler<GetSingleEmployeeQuery, GetSingleEmployeeQuery>.Handle(GetSingleEmployeeQuery request, CancellationToken cancellationToken)
     {
-        var employee = await _employeeRepository.GetSingleEmployeeAndEmailAsync(request.Id, cancellationToken);
-        return employee;
+        var employee = await _employeeRepository.GetOneAsync(x => x.Id == request.Id, p => p.Include(p => p.Account), cancellationToken);
+        throw new NotImplementedException();
     }
 }
