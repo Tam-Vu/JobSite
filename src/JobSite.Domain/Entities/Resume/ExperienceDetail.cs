@@ -11,5 +11,4 @@ public class ExperienceDetail : BaseAuditableEntity
     public required int EndMonth { get; set; }
     public string? Description { get; set; }
     public required Guid ResumeId { get; init; }
-    public Resume Resume { get; set; } = null!;
 }

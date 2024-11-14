@@ -13,6 +13,8 @@ using JobSite.Infrastructure.Common.Security.Jwt;
 using JobSite.Infrastructure.Employees.Persistence;
 using JobSite.Infrastructure.EntityFrameworkCore;
 using JobSite.Infrastructure.Jobs.Persistence;
+using JobSite.Infrastructure.Resumes.ExperienceDetails;
+using JobSite.Infrastructure.Resumes.Persistence;
 using JobSite.Infrastructure.Resumes.Skills;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -61,6 +63,8 @@ public static class DependencyInjection
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IIdentityService, IdentitySerivce>();
         services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+        services.AddScoped<IResumeRepository, ResumeRepository>();
+        services.AddScoped<IExperienceDetailsRepository, ExperienceDetailsRepository>();
         services.AddScoped<IUser, CurrentUser>();
         services.AddProblemDetails();
         return services;

@@ -14,7 +14,7 @@ namespace ChitChat.Domain.Exceptions
 
         public ResourceNotFoundException(Type type) : base($"{type} is missing") { }
 
-        protected ResourceNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        // protected ResourceNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
         public ResourceNotFoundException(string? message) : base(message) { }
 

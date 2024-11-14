@@ -1,11 +1,14 @@
 
 using System.Security.Claims;
+using JobSite.Application.Common.Exceptions;
 using JobSite.Application.Common.Security.Identity;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 
 namespace JobSite.Api.Services;
 public class CurrentUser : IUser
 {
+    //nerver inject UserManager<Account> here, it will cause circular dependency
     private readonly IHttpContextAccessor _httpContextAccessor;
     public CurrentUser(IHttpContextAccessor httpContextAccessor)
     {

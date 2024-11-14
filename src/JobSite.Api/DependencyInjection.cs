@@ -25,8 +25,8 @@ public static class DependencyInjection
 
         var jwtConfig = new JWTConfig();
         jwtConfig = configuration.GetSection(JWTConfig.jwtConfig).Get<JWTConfig>();
-        services.AddSingleton(jwtConfig);
-        var key = Encoding.ASCII.GetBytes(jwtConfig.Secret);
+        services.AddSingleton(jwtConfig!);
+        var key = Encoding.ASCII.GetBytes(jwtConfig!.Secret);
 
         services.AddAuthentication(options =>
             {
