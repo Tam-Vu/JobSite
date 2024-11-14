@@ -21,6 +21,10 @@ namespace JobSite.Infrastructure.Migrations
                 table: "Employers");
 
             migrationBuilder.DropForeignKey(
+                name: "FK_ExperienceDetail_Resume_ResumeId",
+                table: "ExperienceDetail");
+
+            migrationBuilder.DropForeignKey(
                 name: "FK_InterviewSchedule_Jobs_JobId",
                 table: "InterviewSchedule");
 
@@ -430,6 +434,14 @@ namespace JobSite.Infrastructure.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
+                name: "FK_ExperienceDetail_Resume_ResumeId",
+                table: "ExperienceDetail",
+                column: "ResumeId",
+                principalTable: "Resume",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
                 name: "FK_InterviewSchedule_Job_JobId",
                 table: "InterviewSchedule",
                 column: "JobId",
@@ -488,6 +500,10 @@ namespace JobSite.Infrastructure.Migrations
             migrationBuilder.DropForeignKey(
                 name: "FK_Employer_Account_AccountId",
                 table: "Employer");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_ExperienceDetail_Resume_ResumeId",
+                table: "ExperienceDetail");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_InterviewSchedule_Job_JobId",
@@ -913,6 +929,14 @@ namespace JobSite.Infrastructure.Migrations
                 principalTable: "Accounts",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_ExperienceDetail_Resume_ResumeId",
+                table: "ExperienceDetail",
+                column: "ResumeId",
+                principalTable: "Resume",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_InterviewSchedule_Jobs_JobId",

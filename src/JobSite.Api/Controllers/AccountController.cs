@@ -19,7 +19,7 @@ public class AccountController(ISender _mediator) : ControllerBase
         return await _mediator.Send(request, cancellationToken);
     }
 
-    [HttpPost]
+    [HttpGet]
     [Route("ConfirmEmail")]
     public async Task<string> VerifyAccount([FromQuery] string email, string token, CancellationToken cancellationToken)
     {

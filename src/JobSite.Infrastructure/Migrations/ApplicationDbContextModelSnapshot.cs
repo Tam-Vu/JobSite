@@ -178,53 +178,6 @@ namespace JobSite.Infrastructure.Migrations
                     b.ToTable("Employer");
                 });
 
-            modelBuilder.Entity("JobSite.Domain.Entities.ExperienceDetail", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<int>("EndMonth")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("EndYear")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("ResumeId")
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("StartMonth")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("StartYear")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ResumeId");
-
-                    b.ToTable("ExperienceDetail");
-                });
-
             modelBuilder.Entity("JobSite.Domain.Entities.InterviewSchedule", b =>
                 {
                     b.Property<Guid>("Id")
@@ -597,17 +550,6 @@ namespace JobSite.Infrastructure.Migrations
                     b.Navigation("Account");
                 });
 
-            modelBuilder.Entity("JobSite.Domain.Entities.ExperienceDetail", b =>
-                {
-                    b.HasOne("JobSite.Domain.Entities.Resume", "Resume")
-                        .WithMany("ExperienceDetails")
-                        .HasForeignKey("ResumeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Resume");
-                });
-
             modelBuilder.Entity("JobSite.Domain.Entities.InterviewSchedule", b =>
                 {
                     b.HasOne("JobSite.Domain.Entities.Job", "Job")
@@ -665,7 +607,59 @@ namespace JobSite.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.OwnsMany("JobSite.Domain.Entities.ExperienceDetail", "ExperienceDetails", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("CompanyName")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<DateTimeOffset>("Created")
+                                .HasColumnType("timestamp with time zone");
+
+                            b1.Property<string>("CreatedBy")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Description")
+                                .HasColumnType("text");
+
+                            b1.Property<int>("EndMonth")
+                                .HasColumnType("integer");
+
+                            b1.Property<int>("EndYear")
+                                .HasColumnType("integer");
+
+                            b1.Property<DateTimeOffset>("LastModified")
+                                .HasColumnType("timestamp with time zone");
+
+                            b1.Property<string>("LastModifiedBy")
+                                .HasColumnType("text");
+
+                            b1.Property<Guid>("ResumeId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<int>("StartMonth")
+                                .HasColumnType("integer");
+
+                            b1.Property<int>("StartYear")
+                                .HasColumnType("integer");
+
+                            b1.HasKey("Id");
+
+                            b1.HasIndex("ResumeId");
+
+                            b1.ToTable("ExperienceDetail");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ResumeId");
+                        });
+
                     b.Navigation("Employee");
+
+                    b.Navigation("ExperienceDetails");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -754,8 +748,6 @@ namespace JobSite.Infrastructure.Migrations
             modelBuilder.Entity("JobSite.Domain.Entities.Resume", b =>
                 {
                     b.Navigation("Applications");
-
-                    b.Navigation("ExperienceDetails");
 
                     b.Navigation("InverviewSchedules");
                 });

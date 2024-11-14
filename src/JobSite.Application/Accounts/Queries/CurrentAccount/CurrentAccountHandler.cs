@@ -24,7 +24,7 @@ public class CurrentAccountHandler : IRequestHandler<CurrentAccountQuery, Curren
         {
             throw new ValidationException("Invalid user id");
         }
-        var user = await _userManager.FindByIdAsync(userId);
-        return new CurrentAccountResponse(user.Email, user.UserName);
+        var user = await _userManager.FindByIdAsync(userId!);
+        return new CurrentAccountResponse(user!.Email!, user.UserName!);
     }
 }

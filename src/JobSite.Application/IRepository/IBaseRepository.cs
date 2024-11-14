@@ -20,6 +20,7 @@ public interface IBaseRepository<TEntity> where TEntity : BaseEntity
     IQueryable<TEntity> GetQuery();
     Task<TEntity> GetByIdAsync(Guid id, CancellationToken cancellationToken);
     Task<TEntity> GetByIdAsync(Guid id, IEnumerable<Expression<Func<TEntity, BaseEntity>>> includes, CancellationToken cancellationToken);
+    Task<TEntity> GetOneAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
     Task<TEntity> GetOneAsync(Expression<Func<TEntity, bool>> predicate, IEnumerable<Expression<Func<TEntity, object>>> includes, CancellationToken cancellationToken);
 
     Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);

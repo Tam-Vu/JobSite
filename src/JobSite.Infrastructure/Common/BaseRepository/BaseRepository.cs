@@ -72,6 +72,13 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         return query.SingleAsync(cancellationToken) ?? throw new BadRequestException($"not found {nameof(TEntity)}");
     }
 
+    public Task<TEntity> GetOneAsync(Expression<Func<TEntity, bool>> predicate,
+    CancellationToken cancellationToken)
+    {
+        var query = _dbSet.Where(predicate);
+        return query.SingleAsync(cancellationToken) ?? throw new BadRequestException($"not found {nameof(TEntity)}");
+    }
+
     public async Task<TEntity> GetFirstOrDefaultAsync(
         Expression<Func<TEntity, bool>> predicate,
         CancellationToken cancellationToken)

@@ -11,6 +11,5 @@ public record CreateJobCommand
     string Benefit,
     string Location,
     JobType JobType,
-    Decimal Salary,
-    Guid EmployerId
+    Decimal Salary
 ) : IRequest<JobResponseData>;

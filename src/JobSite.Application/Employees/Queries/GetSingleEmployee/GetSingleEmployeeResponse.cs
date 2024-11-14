@@ -3,7 +3,7 @@ public record GetSingleEmployeeResponse
 (
     string Fullname,
     string? Address,
-    List<AccountDto> Accounts
+    AccountDto Accounts
 );
 
 public record AccountDto
