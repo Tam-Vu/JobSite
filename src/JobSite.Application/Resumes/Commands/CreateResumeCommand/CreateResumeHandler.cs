@@ -18,12 +18,13 @@ public class CreateResumeHandler : IRequestHandler<CreateResumeCommand, Result<R
         _user = user;
         _employeeRepository = employeeRepository;
     }
-    public Task<Result<ResponseResumeCommand>> Handle(CreateResumeCommand request, CancellationToken cancellationToken)
+    public async Task<Result<ResponseResumeCommand>> Handle(CreateResumeCommand request, CancellationToken cancellationToken)
     {
         try
         {
-            var user = _user.GetAccount();
-            var employee = _employeeRepository.GetEmployeeByAccountIdAsync(user.Id, cancellationToken);
+            // var user = _user.GetAccount();
+            var userId = _user.Id;
+            var employee = await _employeeRepository.GetEmployeeByAccountIdAsync(userId!, cancellationToken);
             if (employee == null)
             {
                 throw new Exception("You don't have permission to create a resume");
@@ -38,28 +39,31 @@ public class CreateResumeHandler : IRequestHandler<CreateResumeCommand, Result<R
                 EmployeeId = Guid.Parse(employee.Id.ToString())
             };
 
-            _resumeRepository.AddAsync(resume, cancellationToken);
-
             foreach (var experienceDetail in request.ExperienceDetails)
             {
-                var experience = new ExperienceDetail
-                {
-                    CompanyName = experienceDetail.CompanyName,
-                    StartYear = experienceDetail.StartYear,
-                    StartMonth = experienceDetail.StartMonth,
-                    EndYear = experienceDetail.EndYear,
-                    EndMonth = experienceDetail.EndMonth,
-                    Description = experienceDetail.Description,
-                    ResumeId = resume.Id
-                };
-                _experienceDetailsRepository.AddAsync(experience, cancellationToken);
-            }
 
-            return Task.FromResult(Result<ResponseResumeCommand>.Success(new ResponseResumeCommand(resume.Id, resume.Created, resume.LastModified)));
+                resume.ExperienceDetails.Add
+                (
+                    new ExperienceDetail
+                    {
+                        CompanyName = experienceDetail.CompanyName,
+                        StartYear = experienceDetail.StartYear,
+                        StartMonth = experienceDetail.StartMonth,
+                        EndYear = experienceDetail.EndYear,
+                        EndMonth = experienceDetail.EndMonth,
+                        Description = experienceDetail.Description,
+                        ResumeId = resume.Id
+                    }
+                );
+            }
+            await _resumeRepository.AddAsync(resume, cancellationToken);
+
+            return Result<ResponseResumeCommand>.Success(new ResponseResumeCommand(resume.Id, resume.Created, resume.LastModified));
         }
         catch (Exception exception)
         {
             throw new BadRequestException(exception.Message);
         }
+
     }
 }

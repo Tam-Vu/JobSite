@@ -3,5 +3,4 @@ public interface IUser
 {
     string? Id { get; }
     string GetUserName();
-    Account GetAccount();
 }

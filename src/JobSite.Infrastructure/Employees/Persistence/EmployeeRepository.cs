@@ -12,11 +12,11 @@ public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository
     {
     }
 
-    public async Task<Employee> GetEmployeeByAccountIdAsync(Guid accountId, CancellationToken cancellationToken)
+    public async Task<Employee> GetEmployeeByAccountIdAsync(string accountId, CancellationToken cancellationToken)
     {
         var employee = await (
             from empl in _dbContext.Employees
-            where empl.AccountId == accountId
+            where empl.AccountId.ToString() == accountId
             select new Employee
             {
                 Id = empl.Id,
