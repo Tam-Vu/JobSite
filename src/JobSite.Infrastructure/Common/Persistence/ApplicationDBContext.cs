@@ -9,15 +9,15 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 namespace JobSite.Infrastructure.Common.Persistence;
 public class ApplicationDbContext : IdentityDbContext<Account, UserRole, Guid>, IApplicationDbContext
 {
-    public DbSet<Job> Jobs { get; set; }
-    public DbSet<Employee> Employees { get; set; }
-    public DbSet<Employer> Employers { get; set; }
-    public DbSet<Account> Accounts { get; set; }
-    public DbSet<Resume> Resumes { get; set; }
-    public DbSet<Skill> Skills { get; set; }
-    public DbSet<JobApplication> JobApplications { get; set; }
-    public DbSet<InterviewSchedule> interviewSchedules { get; set; }
-    public DbSet<ExperienceDetail> experienceDetails { get; set; }
+    public required DbSet<Job> Jobs { get; set; }
+    public required DbSet<Employee> Employees { get; set; }
+    public required DbSet<Employer> Employers { get; set; }
+    public required DbSet<Account> Accounts { get; set; }
+    public required DbSet<Resume> Resumes { get; set; }
+    public required DbSet<Skill> Skills { get; set; }
+    public required DbSet<JobApplication> JobApplications { get; set; }
+    public required DbSet<InterviewSchedule> interviewSchedules { get; set; }
+    public required DbSet<ExperienceDetail> experienceDetails { get; set; }
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
 

@@ -1,0 +1,1 @@
+namespace JobSite.Application.IRepository;
