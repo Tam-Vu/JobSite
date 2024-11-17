@@ -1,5 +1,6 @@
 using JobSite.Application.Common.Models;
-using MediatR;
+
+using JobSite.Application.Resumes.Commands.Common;
 
 namespace JobSite.Application.Resumes.Commands.CreateResumeCommand;
 
@@ -9,15 +10,6 @@ public record CreateResumeCommand
     string Experience,
     string Education,
     string File,
+    List<SkillCommand> Skills,
     List<CreateExperienceDetail> ExperienceDetails
 ) : IRequest<Result<ResponseResumeCommand>>;
-
-public record CreateExperienceDetail
-(
-    string CompanyName,
-    int StartYear,
-    int StartMonth,
-    int EndYear,
-    int EndMonth,
-    string Description
-);
