@@ -71,5 +71,4 @@ public class GlobalHandlerExceptionMiddleware
         var json = JsonSerializer.Serialize(problemDetails);
         await context.Response.WriteAsync(json);
     }
-
 }

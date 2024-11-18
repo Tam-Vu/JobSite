@@ -16,13 +16,4 @@ public class Resume : BaseAuditableEntity
     public ICollection<ExperienceDetail> ExperienceDetails { get; set; } = new HashSet<ExperienceDetail>();
     public ICollection<JobApplication> Applications { get; private set; } = new HashSet<JobApplication>();
     public ICollection<InterviewSchedule> InverviewSchedules { get; private set; } = new HashSet<InterviewSchedule>();
-    // public Resume(Guid id, string title, string experience, string education, string file, Guid employeeId)
-    //     : base(id == Guid.Empty ? Guid.NewGuid() : id)
-    // {
-    //     this.Title = title;
-    //     this.Experience = experience;
-    //     this.Education = education;
-    //     this.EmployeeId = employeeId;
-    //     this.File = file;
-    // }
 }

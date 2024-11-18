@@ -19,31 +19,47 @@ public interface IBaseRepository<TEntity> where TEntity : BaseEntity
 
     IQueryable<TEntity> GetQuery();
     Task<TEntity> GetByIdAsync(Guid id, CancellationToken cancellationToken);
-    Task<TEntity> GetByIdAsync(Guid id, IEnumerable<Expression<Func<TEntity, BaseEntity>>> includes, CancellationToken cancellationToken);
-    Task<TEntity> GetOneAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
-    Task<TEntity> GetOneAsync(Expression<Func<TEntity, bool>> predicate, IEnumerable<Expression<Func<TEntity, object>>> includes, CancellationToken cancellationToken);
+    Task<TEntity> GetByIdAsync(Guid id,
+        IEnumerable<Expression<Func<TEntity, BaseEntity>>> includes,
+        CancellationToken cancellationToken);
+    Task<TEntity> GetOneAsync(Expression<Func<TEntity, bool>> predicate,
+        CancellationToken cancellationToken);
+    Task<TEntity> GetOneAsync(Expression<Func<TEntity, bool>> predicate,
+        IEnumerable<Expression<Func<TEntity, object>>> includes,
+        CancellationToken cancellationToken);
 
-    Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
+    Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> predicate,
+        CancellationToken cancellationToken);
 
-    Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
+    Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate,
+        CancellationToken cancellationToken);
 
-    Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, IEnumerable<Expression<Func<TEntity,
-        BaseEntity>>> includes, CancellationToken cancellationToken);
+    Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate,
+        IEnumerable<Expression<Func<TEntity, BaseEntity>>> includes,
+        CancellationToken cancellationToken);
 
-    Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>,
-        IIncludableQueryable<TEntity, object>> includeQuery, CancellationToken cancellationToken);
+    Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate,
+        Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includeQuery,
+        CancellationToken cancellationToken);
 
     Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
 
     Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken);
 
-    Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, IEnumerable<Expression<Func<TEntity,
-        BaseEntity>>> includes, CancellationToken cancellationToken);
-    Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>,
-        IIncludableQueryable<TEntity, object>> includeQuery, CancellationToken cancellationToken);
+    Task<List<TEntity>> GetAllAsync(
+        Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includeQuery,
+        CancellationToken cancellationToken);
 
-    Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>,
-    IOrderedQueryable<TEntity>> sort, CancellationToken cancellationToken);
+    Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate,
+        IEnumerable<Expression<Func<TEntity, BaseEntity>>> includes,
+        CancellationToken cancellationToken);
+    Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate,
+        Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includeQuery,
+        CancellationToken cancellationToken);
+
+    Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> sort,
+        CancellationToken cancellationToken);
 
     Task<List<TEntity>> GetAllAsync(
         Expression<Func<TEntity, bool>> predicate,
@@ -79,4 +95,7 @@ public interface IBaseRepository<TEntity> where TEntity : BaseEntity
     Task<TEntity> DeleteAsync(TEntity entity, CancellationToken cancellationToken);
 
     Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
+
+    // an entity is tracked by the context if it exists in the context, not add to database
+    Task<TEntity> Attach(TEntity entity);
 }

@@ -1,6 +1,5 @@
 using JobSite.Application.Common.Models;
-
-using JobSite.Application.Resumes.Commands.Common;
+using JobSite.Application.Resumes.Common;
 
 namespace JobSite.Application.Resumes.Commands.CreateResumeCommand;
 

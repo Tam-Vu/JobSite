@@ -1,5 +1,5 @@
 
-namespace JobSite.Application.Resumes.Commands.Common;
+namespace JobSite.Application.Resumes.Common;
 public record ResponseResumeCommand
 (
     Guid Id,

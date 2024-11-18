@@ -3,7 +3,7 @@ using JobSite.Application.Common.Exceptions;
 using JobSite.Application.Common.Models;
 using JobSite.Application.Common.Security.Identity;
 using JobSite.Application.IRepository;
-using JobSite.Application.Resumes.Commands.Common;
+using JobSite.Application.Resumes.Common;
 using Mapster;
 
 namespace JobSite.Application.Resumes.Commands.UpdateResumeCommand;

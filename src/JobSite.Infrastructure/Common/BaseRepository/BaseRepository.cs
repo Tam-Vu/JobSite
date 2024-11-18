@@ -60,7 +60,8 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         return entity ?? throw new BadRequestException($"not found {nameof(TEntity)}"); ;
     }
 
-    public Task<TEntity> GetOneAsync(Expression<Func<TEntity, bool>> predicate,
+    public Task<TEntity> GetOneAsync(
+        Expression<Func<TEntity, bool>> predicate,
         IEnumerable<Expression<Func<TEntity, object>>> includes,
         CancellationToken cancellationToken)
     {
@@ -72,8 +73,9 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         return query.SingleAsync(cancellationToken) ?? throw new BadRequestException($"not found {nameof(TEntity)}");
     }
 
-    public Task<TEntity> GetOneAsync(Expression<Func<TEntity, bool>> predicate,
-    CancellationToken cancellationToken)
+    public Task<TEntity> GetOneAsync(
+        Expression<Func<TEntity, bool>> predicate,
+        CancellationToken cancellationToken)
     {
         var query = _dbSet.Where(predicate);
         return query.SingleAsync(cancellationToken) ?? throw new BadRequestException($"not found {nameof(TEntity)}");
@@ -102,8 +104,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
 
     public async Task<TEntity> GetFirstOrDefaultAsync(
         Expression<Func<TEntity, bool>> predicate,
-        Func<IQueryable<TEntity>,
-        IIncludableQueryable<TEntity, object>> includeQuery,
+        Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includeQuery,
         CancellationToken cancellationToken)
     {
         var query = _dbSet.Where(predicate);
@@ -114,6 +115,15 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     public Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken)
     {
         return _dbSet.ToListAsync(cancellationToken);
+    }
+
+    public async Task<List<TEntity>> GetAllAsync(
+        Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includeQuery,
+        CancellationToken cancellationToken)
+    {
+        var query = _dbSet.AsQueryable();
+        query = includeQuery(query);
+        return await query.ToListAsync(cancellationToken);
     }
 
     public async Task<List<TEntity>> GetAllAsync(
@@ -139,8 +149,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
 
     public async Task<List<TEntity>> GetAllAsync(
         Expression<Func<TEntity, bool>> predicate,
-        Func<IQueryable<TEntity>,
-        IIncludableQueryable<TEntity, object>> includeQuery,
+        Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includeQuery,
         CancellationToken cancellationToken)
     {
         var query = _dbSet.Where(predicate);
@@ -150,8 +159,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
 
     public async Task<List<TEntity>> GetAllAsync(
         Expression<Func<TEntity, bool>> predicate,
-        Func<IQueryable<TEntity>,
-        IOrderedQueryable<TEntity>> sort,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> sort,
         CancellationToken cancellationToken)
     {
         var query = _dbSet.Where(predicate);
@@ -267,6 +275,13 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         await _dbSet.AddRangeAsync(entities);
         await _dbContext.SaveChangesAsync(cancellationToken);
         return entities;
+    }
+
+    public async Task<TEntity> Attach(TEntity entity)
+    {
+        var attachedEntity = _dbSet.Attach(entity).Entity;
+        await Task.CompletedTask;
+        return attachedEntity;
     }
 
     // protected async Task<PaginationResponse<TEntity>> GetPaginationEntities(IQueryable<TEntity> query, int pageIndex, int pageSize)
