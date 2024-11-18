@@ -12,7 +12,6 @@ public class GetListResumeHandler : IRequestHandler<GetListResumeQuery, List<Res
         _resumeRepository = resumeRepository;
     }
 
-
     public async Task<List<ResponseResumeQuery>> Handle(GetListResumeQuery request, CancellationToken cancellationToken)
     {
         var resumes = await _resumeRepository.GetAllAsync(query => query.Include(x => x.Skills).Include(x => x.ExperienceDetails), cancellationToken);

@@ -1,4 +1,3 @@
-using JobSite.Application.Common.Interfaces;
 using JobSite.Application.IRepository;
 using JobSite.Domain.Entities;
 using JobSite.Domain.Events;

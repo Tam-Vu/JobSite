@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using JobSite.Infrastructure.EntityFrameworkCore.Interceptors;
-using JobSite.Application.Common.Interfaces;
 
 public static class EntityFrameworkRegisteration
 {
@@ -30,7 +29,6 @@ public static class EntityFrameworkRegisteration
                 opt.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
             });
         });
-        builder.Services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
         return builder;
     }
 }

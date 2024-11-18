@@ -1,7 +1,6 @@
 
 using System.Web;
 using JobSite.Application.Common.Exceptions;
-using JobSite.Application.Common.Interfaces;
 using JobSite.Application.IRepository;
 using JobSite.Domain.Events;
 using Microsoft.AspNetCore.Identity;

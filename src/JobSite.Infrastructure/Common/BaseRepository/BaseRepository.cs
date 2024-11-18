@@ -42,21 +42,18 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         Guid id,
         CancellationToken cancellationToken)
     {
-        var entity = await _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        var entity = await _dbSet.SingleAsync(x => x.Id == id, cancellationToken);
         return entity ?? throw new BadRequestException($"not found {nameof(TEntity)}"); ;
     }
 
     public async Task<TEntity> GetByIdAsync(
         Guid id,
-        IEnumerable<Expression<Func<TEntity, BaseEntity>>> includes,
+        Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includeQuery,
         CancellationToken cancellationToken)
     {
-        var query = _dbSet.AsQueryable();
-        foreach (var include in includes)
-        {
-            query = query.Include(include);
-        }
-        var entity = await query.SingleAsync(x => x.Id == id, cancellationToken);
+        var query = _dbSet.Where(x => x.Id == id);
+        query = includeQuery(query);
+        var entity = await query.SingleAsync(cancellationToken);
         return entity ?? throw new BadRequestException($"not found {nameof(TEntity)}"); ;
     }
 

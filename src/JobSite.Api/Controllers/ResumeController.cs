@@ -4,6 +4,7 @@ using JobSite.Application.Resumes.Commands.CreateResumeCommand;
 using JobSite.Application.Resumes.Commands.UpdateResumeCommand;
 using JobSite.Application.Resumes.Common;
 using JobSite.Application.Resumes.Queries.GetListResumeQuery;
+using JobSite.Application.Resumes.Queries.GetResumeDetailsQuery;
 using JobSite.Contracts.Resume;
 using Mapster;
 using MediatR;
@@ -38,5 +39,13 @@ public class ResumeController(IMediator _mediator) : ControllerBase
     public async Task<List<ResponseResumeQuery>> GetAllResume(CancellationToken cancellationToken)
     {
         return await _mediator.Send(new GetListResumeQuery(), cancellationToken);
+    }
+
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<ResponseResumeQuery> GetResumeDetails(Guid id, CancellationToken cancellationToken)
+    {
+        var request = new GetResumeDetailsQuery(id);
+        return await _mediator.Send(request, cancellationToken);
     }
 }
