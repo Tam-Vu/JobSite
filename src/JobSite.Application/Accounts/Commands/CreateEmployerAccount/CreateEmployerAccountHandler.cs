@@ -1,22 +1,23 @@
-
-using System.Web;
+using JobSite.Application.Accounts.Common;
 using JobSite.Application.Common.Exceptions;
+using JobSite.Application.Common.Models;
 using JobSite.Application.IRepository;
-using JobSite.Domain.Events;
 using Microsoft.AspNetCore.Identity;
 
-namespace JobSite.Application.Accounts.Commands.CreateAccount;
+namespace JobSite.Application.Accounts.Commands.CreateEmployerAccountCommand;
 
-public class CreateAccountHandler : IRequestHandler<CreateAccountCommand, string>
+public class CreateEmployerAccountHandler : IRequestHandler<CreateEmployerAccountCommand, Result<AccountCommandResponse>>
 {
     private readonly UserManager<Account> _userManager;
+    private readonly IEmployerRepository _employeeRepository;
     private readonly IEmailSenderRepository _emailSenderRepository;
-    public CreateAccountHandler(UserManager<Account> userManager, IEmailSenderRepository emailSenderRepository)
+    public CreateEmployerAccountHandler(UserManager<Account> userManager, IEmailSenderRepository emailSenderRepository, IEmployerRepository employerRepository)
     {
         _userManager = userManager;
         _emailSenderRepository = emailSenderRepository;
+        _employeeRepository = employerRepository;
     }
-    public async Task<string> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
+    public async Task<Result<AccountCommandResponse>> Handle(CreateEmployerAccountCommand request, CancellationToken cancellationToken)
     {
         var checkUsername = await _userManager.FindByNameAsync(request.UserName);
         if (checkUsername != null)
@@ -41,10 +42,17 @@ public class CreateAccountHandler : IRequestHandler<CreateAccountCommand, string
         {
             throw new BadRequestException($"Create account failed: {result.Errors}");
         }
-        var token = await _userManager.GenerateEmailConfirmationTokenAsync(newAccount);
-        await _emailSenderRepository.SendEmailConfirmationAsync(newAccount.Email, token, cancellationToken);
-        // newAccount.AddDomainEvent(new AccountCreatedEvent(newAccount));
-        // await _context.SaveChangesAsync(cancellationToken);
-        return "create account success with id: " + newAccount.UserName;
+
+        var newEmployer = new Employer
+        {
+            Name = request.Name,
+            Description = request.Description,
+            Sector = request.Sector,
+            Location = request.Location,
+            Website = request.Website,
+            AccountId = newAccount.Id
+        };
+        await _employeeRepository.AddAsync(newEmployer, cancellationToken);
+        return Result<AccountCommandResponse>.Success(new AccountCommandResponse(newAccount.Id, newAccount.Created, newAccount.LastModified));
     }
 }

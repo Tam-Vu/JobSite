@@ -1,5 +1,6 @@
 
-using JobSite.Application.Common.Security.Request;
+using JobSite.Application.Common.Models;
+using JobSite.Application.Jobs.Common;
 using JobSite.Domain.Enums;
 
 namespace JobSite.Application.Jobs.Commands.CreateJob;
@@ -12,4 +13,4 @@ public record CreateJobCommand
     string Location,
     JobType JobType,
     Decimal Salary
-) : IRequest<JobResponseData>;
+) : IRequest<Result<JobCommandResponse>>;

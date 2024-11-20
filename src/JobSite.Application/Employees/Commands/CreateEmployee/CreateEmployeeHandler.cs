@@ -1,5 +1,4 @@
 
-using JobSite.Application.Accounts.Commands.CreateAccount;
 using JobSite.Application.Common.Security.Identity;
 using JobSite.Application.Employees.Commands.CreateEmployee;
 using JobSite.Application.IRepository;

@@ -14,7 +14,6 @@ public class GetListSkillQueryHandler : IRequestHandler<GetListSkillQuery, List<
     }
     public async Task<List<SkillResponseData>> Handle(GetListSkillQuery request, CancellationToken cancellationToken)
     {
-        // var result = await _skillRepository.GetAllAsync(p=>true, p=> p.Include(c=>c.DomainEvents), cancellationToken);
         var result = await _skillRepository.GetAllAsync(cancellationToken);
         return result.Select(skill => new SkillResponseData(skill.Id, skill.Name)).ToList();
     }

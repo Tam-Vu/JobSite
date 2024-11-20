@@ -1,6 +1,6 @@
-namespace JobSite.Application.Accounts.Commands.CreateAccount;
+namespace JobSite.Application.Accounts.Commands.CreateEmployeeAccountCommand;
 
-public class CreateAccountValidator : AbstractValidator<CreateAccountCommand>
+public class CreateAccountValidator : AbstractValidator<CreateEmployeeAccountCommand>
 {
     public CreateAccountValidator()
     {
@@ -18,5 +18,10 @@ public class CreateAccountValidator : AbstractValidator<CreateAccountCommand>
         RuleFor(x => x.PhoneNumber)
             .NotEmpty().WithMessage("Phone number is required")
             .Matches(@"^\d{10}$").WithMessage("Phone number is not valid");
+        RuleFor(x => x.Fullname)
+            .NotEmpty().WithMessage("Fullname is required")
+            .MaximumLength(100).WithMessage("Fullname must not exceed 100 characters");
+        RuleFor(x => x.Address)
+            .MaximumLength(200).WithMessage("Address must not exceed 200 characters");
     }
 }

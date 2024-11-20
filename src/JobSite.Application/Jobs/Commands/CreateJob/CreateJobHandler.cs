@@ -1,26 +1,27 @@
 
 
 using JobSite.Application.Common.Exceptions;
+using JobSite.Application.Common.Models;
 using JobSite.Application.Common.Security.Identity;
 using JobSite.Application.IRepository;
-// using JobSite.Application.Jobs.Commands.CreateJob;
+using JobSite.Application.Jobs.Common;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace JobSite.Application.Jobs.Commands.CreateJob;
-public class CreateJobHandler : IRequestHandler<CreateJobCommand, JobResponseData>
+public class CreateJobHandler : IRequestHandler<CreateJobCommand, Result<JobCommandResponse>>
 {
     private readonly IJobRepository _jobRepository;
     private readonly IUser _user;
-    private readonly IEmployeeRepository _employeeRepository;
-    public CreateJobHandler(IJobRepository jobRepository, IUser user, IEmployeeRepository employeeRepository)
+    private readonly IEmployerRepository _employerRepository;
+    public CreateJobHandler(IJobRepository jobRepository, IUser user, IEmployerRepository employerRepository)
     {
         _jobRepository = jobRepository;
         _user = user;
-        _employeeRepository = employeeRepository;
+        _employerRepository = employerRepository;
     }
-    public async Task<JobResponseData> Handle(CreateJobCommand request, CancellationToken cancellationToken)
+    public async Task<Result<JobCommandResponse>> Handle(CreateJobCommand request, CancellationToken cancellationToken)
     {
-        var employer = await _employeeRepository.GetOneAsync(x => x.AccountId.ToString() == _user.Id, cancellationToken);
+        var employer = await _employerRepository.GetOneAsync(x => x.AccountId.ToString() == _user.Id, cancellationToken);
         if (employer == null)
         {
             throw new NotFoundException("Employer not found");
@@ -44,6 +45,6 @@ public class CreateJobHandler : IRequestHandler<CreateJobCommand, JobResponseDat
         {
             throw new BadRequestException(ex.Message);
         }
-        return JobResponseData.Success(entity);
+        return Result<JobCommandResponse>.Success(new JobCommandResponse(entity.Id, entity.Created, entity.LastModified));
     }
 }
