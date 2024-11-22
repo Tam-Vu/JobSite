@@ -13,7 +13,7 @@ public class Job : BaseAuditableEntity
     public Decimal Salary { get; set; }
     public JobType JobType { get; set; }
     public int AppliedResumes { get; set; }
-    public JobStatus JobStatus { get; set; }
+    public JobStatus Status { get; set; }
     public ICollection<JobApplication> Applications { get; set; } = new HashSet<JobApplication>();
     public ICollection<InterviewSchedule> InterviewSchedules { get; set; } = new HashSet<InterviewSchedule>();
     public required Guid EmployerId { get; init; }

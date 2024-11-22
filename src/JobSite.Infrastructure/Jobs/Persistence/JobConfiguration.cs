@@ -1,4 +1,6 @@
 
+using JobSite.Domain.Enums;
+
 namespace JobSite.Infrastructure.Jobs.Persistence;
 public class JobConfiguration : IEntityTypeConfiguration<Job>
 {
@@ -12,8 +14,8 @@ public class JobConfiguration : IEntityTypeConfiguration<Job>
         builder.Property(x => x.Salary)
             .HasColumnType("decimal(18,2)");
         // builder.Property(x => x.jobType).IsRequired();
-        // builder.Property(x => x.jobStatus);
-        // .HasDefaultValue("Active");
+        builder.Property(x => x.Status)
+        .HasDefaultValue(JobStatus.Active);
         builder.Property(x => x.EmployerId).IsRequired();
 
         builder

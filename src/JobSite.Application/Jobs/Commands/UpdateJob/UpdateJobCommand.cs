@@ -11,6 +11,6 @@ public record UpdateJobCommand(
     string requirement,
     string benefit,
     string location,
-    int jobType,
+    JobType jobType,
     Decimal salary
 ) : IRequest<Result<JobCommandResponse>>;

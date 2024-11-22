@@ -212,7 +212,9 @@ namespace JobSite.Infrastructure.Migrations
                         .HasColumnType("time without time zone");
 
                     b.Property<int>("Status")
-                        .HasColumnType("integer");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(0);
 
                     b.HasKey("Id");
 
@@ -247,9 +249,6 @@ namespace JobSite.Infrastructure.Migrations
                     b.Property<Guid>("EmployerId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("JobStatus")
-                        .HasColumnType("integer");
-
                     b.Property<int>("JobType")
                         .HasColumnType("integer");
 
@@ -267,6 +266,11 @@ namespace JobSite.Infrastructure.Migrations
 
                     b.Property<decimal>("Salary")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(0);
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -304,7 +308,9 @@ namespace JobSite.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<int>("Status")
-                        .HasColumnType("integer");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(0);
 
                     b.HasKey("Id");
 
@@ -626,11 +632,9 @@ namespace JobSite.Infrastructure.Migrations
                             b1.Property<string>("Description")
                                 .HasColumnType("text");
 
-                            b1.Property<int>("EndMonth")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("EndYear")
-                                .HasColumnType("integer");
+                            b1.Property<string>("EndDate")
+                                .IsRequired()
+                                .HasColumnType("text");
 
                             b1.Property<DateTimeOffset>("LastModified")
                                 .HasColumnType("timestamp with time zone");
@@ -641,11 +645,9 @@ namespace JobSite.Infrastructure.Migrations
                             b1.Property<Guid>("ResumeId")
                                 .HasColumnType("uuid");
 
-                            b1.Property<int>("StartMonth")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("StartYear")
-                                .HasColumnType("integer");
+                            b1.Property<string>("StartDate")
+                                .IsRequired()
+                                .HasColumnType("text");
 
                             b1.HasKey("Id");
 

@@ -2,7 +2,7 @@ namespace JobSite.Domain.Enums;
 
 public enum ApplicationStatus
 {
-    Pending,
-    Approved,
-    Rejected
+    Pending, // 0
+    Approved, // 1
+    Rejected // 2
 }

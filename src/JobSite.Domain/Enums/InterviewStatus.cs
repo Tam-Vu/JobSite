@@ -2,7 +2,7 @@ namespace JobSite.Domain.Enums;
 
 public enum InterviewStatus
 {
-    Scheduled,
-    Completed,
-    Cancelled
+    Scheduled, // 0
+    Completed, // 1
+    Cancelled // 2
 }

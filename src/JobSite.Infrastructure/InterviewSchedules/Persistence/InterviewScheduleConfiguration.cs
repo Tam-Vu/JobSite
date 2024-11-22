@@ -1,4 +1,6 @@
 
+using JobSite.Domain.Enums;
+
 namespace JobSite.Infrastructure.InterviewSchedules.Persistence;
 public class InterviewScheduleConfiguration : IEntityTypeConfiguration<InterviewSchedule>
 {
@@ -8,8 +10,7 @@ public class InterviewScheduleConfiguration : IEntityTypeConfiguration<Interview
         builder.Property(x => x.Id).ValueGeneratedOnAdd();
         // builder.Property(x => x.interviewDate).IsRequired();
         // builder.Property(x => x.startTime).IsRequired();
-        // builder.Property(x => x.status);
-        // .HasDefaultValue("Scheduled");
+        builder.Property(x => x.Status).HasDefaultValue(InterviewStatus.Scheduled);
         builder.Property(x => x.ResumeId).IsRequired();
         builder.Property(x => x.JobId).IsRequired();
         builder

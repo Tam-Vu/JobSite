@@ -16,4 +16,9 @@ public static class ExtensionMethod
             }
         }
     }
+
+    public static string FormatMonthYear(int month, int year)
+    {
+        return string.Format("{0}/{1}", month, year);
+    }
 }

@@ -2,6 +2,6 @@ namespace JobSite.Domain.Enums;
 
 public enum JobStatus
 {
-    Active,
-    Inactive,
+    Active, // 0
+    Inactive, // 1
 }

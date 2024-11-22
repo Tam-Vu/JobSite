@@ -1,5 +1,5 @@
 namespace JobSite.Application.IRepository;
-public interface IJobApplication : IBaseRepository<JobApplication>
+public interface IJobApplicationRepository : IBaseRepository<JobApplication>
 {
 
 }

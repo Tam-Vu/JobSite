@@ -1,3 +1,5 @@
+using JobSite.Domain.Enums;
+
 namespace JobSite.Infrastructure.Applications.Persistence;
 public class ApplicationConfiguration : IEntityTypeConfiguration<JobApplication>
 {
@@ -5,7 +7,7 @@ public class ApplicationConfiguration : IEntityTypeConfiguration<JobApplication>
     {
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd();
-        // builder.Property(x => x.status).HasDefaultValue("Pending");
+        builder.Property(x => x.Status).HasDefaultValue(ApplicationStatus.Pending);
         builder.Property(x => x.JobId).IsRequired();
         builder.Property(x => x.ResumeId).IsRequired();
         builder

@@ -90,6 +90,26 @@ namespace JobSite.Infrastructure.Migrations
                 table: "Accounts");
 
             migrationBuilder.DropColumn(
+                name: "EndMonth",
+                table: "ExperienceDetail");
+
+            migrationBuilder.DropColumn(
+                name: "EndYear",
+                table: "ExperienceDetail");
+
+            migrationBuilder.DropColumn(
+                name: "StartMonth",
+                table: "ExperienceDetail");
+
+            migrationBuilder.DropColumn(
+                name: "StartYear",
+                table: "ExperienceDetail");
+
+            migrationBuilder.DropColumn(
+                name: "JobStatus",
+                table: "Jobs");
+
+            migrationBuilder.DropColumn(
                 name: "Email",
                 table: "Employees");
 
@@ -170,6 +190,45 @@ namespace JobSite.Infrastructure.Migrations
                 name: "Address",
                 table: "Account",
                 newName: "ConcurrencyStamp");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "Status",
+                table: "JobApplication",
+                type: "integer",
+                nullable: false,
+                defaultValue: 0,
+                oldClrType: typeof(int),
+                oldType: "integer");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "Status",
+                table: "InterviewSchedule",
+                type: "integer",
+                nullable: false,
+                defaultValue: 0,
+                oldClrType: typeof(int),
+                oldType: "integer");
+
+            migrationBuilder.AddColumn<string>(
+                name: "EndDate",
+                table: "ExperienceDetail",
+                type: "text",
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AddColumn<string>(
+                name: "StartDate",
+                table: "ExperienceDetail",
+                type: "text",
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AddColumn<int>(
+                name: "Status",
+                table: "Job",
+                type: "integer",
+                nullable: false,
+                defaultValue: 0);
 
             migrationBuilder.AlterColumn<string>(
                 name: "UserName",
@@ -576,6 +635,18 @@ namespace JobSite.Infrastructure.Migrations
                 table: "Account");
 
             migrationBuilder.DropColumn(
+                name: "EndDate",
+                table: "ExperienceDetail");
+
+            migrationBuilder.DropColumn(
+                name: "StartDate",
+                table: "ExperienceDetail");
+
+            migrationBuilder.DropColumn(
+                name: "Status",
+                table: "Job");
+
+            migrationBuilder.DropColumn(
                 name: "Email",
                 table: "Account");
 
@@ -676,6 +747,59 @@ namespace JobSite.Infrastructure.Migrations
                 name: "AccessFailedCount",
                 table: "Accounts",
                 newName: "Role");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "Status",
+                table: "JobApplication",
+                type: "integer",
+                nullable: false,
+                oldClrType: typeof(int),
+                oldType: "integer",
+                oldDefaultValue: 0);
+
+            migrationBuilder.AlterColumn<int>(
+                name: "Status",
+                table: "InterviewSchedule",
+                type: "integer",
+                nullable: false,
+                oldClrType: typeof(int),
+                oldType: "integer",
+                oldDefaultValue: 0);
+
+            migrationBuilder.AddColumn<int>(
+                name: "EndMonth",
+                table: "ExperienceDetail",
+                type: "integer",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.AddColumn<int>(
+                name: "EndYear",
+                table: "ExperienceDetail",
+                type: "integer",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.AddColumn<int>(
+                name: "StartMonth",
+                table: "ExperienceDetail",
+                type: "integer",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.AddColumn<int>(
+                name: "StartYear",
+                table: "ExperienceDetail",
+                type: "integer",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.AddColumn<int>(
+                name: "JobStatus",
+                table: "Jobs",
+                type: "integer",
+                nullable: false,
+                defaultValue: 0);
 
             migrationBuilder.AddColumn<string>(
                 name: "Email",

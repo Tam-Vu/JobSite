@@ -54,15 +54,15 @@ public class CreateResumeHandler : IRequestHandler<CreateResumeCommand, Result<R
 
             foreach (var experienceDetail in request.ExperienceDetails)
             {
+                string StartDate = ExtensionMethod.FormatMonthYear(experienceDetail.StartMonth, experienceDetail.StartYear);
+                string EndDate = ExtensionMethod.FormatMonthYear(experienceDetail.EndMonth, experienceDetail.EndYear);
                 resume.ExperienceDetails.Add
                 (
                     new ExperienceDetail
                     {
                         CompanyName = experienceDetail.CompanyName,
-                        StartYear = experienceDetail.StartYear,
-                        StartMonth = experienceDetail.StartMonth,
-                        EndYear = experienceDetail.EndYear,
-                        EndMonth = experienceDetail.EndMonth,
+                        StartDate = StartDate,
+                        EndDate = EndDate,
                         Description = experienceDetail.Description,
                         ResumeId = resume.Id
                     }

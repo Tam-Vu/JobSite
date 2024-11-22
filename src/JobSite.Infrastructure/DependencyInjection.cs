@@ -5,6 +5,7 @@ using JobSite.Application.Common.Security.Identity;
 using JobSite.Application.Common.Security.Jwt;
 using JobSite.Domain.Identity;
 using JobSite.Infrastructure.Accounts.Persistence;
+using JobSite.Infrastructure.Application.Persistence;
 using JobSite.Infrastructure.Common.Middleware;
 using JobSite.Infrastructure.Common.Persistence;
 using JobSite.Infrastructure.Common.Security.BindingEnvClasses;
@@ -67,6 +68,7 @@ public static class DependencyInjection
         services.AddScoped<IEmployerRepository, EmployerRepository>();
         services.AddScoped<IResumeRepository, ResumeRepository>();
         services.AddScoped<IExperienceDetailsRepository, ExperienceDetailsRepository>();
+        services.AddScoped<IJobApplicationRepository, ApplicationRepository>();
         services.AddScoped<IUser, CurrentUser>();
         services.AddProblemDetails();
         return services;
