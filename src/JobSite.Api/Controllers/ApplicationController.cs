@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JobSite.Api.Controllers;
 
 [ApiController]
-[Authorize]
+// [Authorize]
 [Route("api/[controller]")]
 public class ApplicationController(ISender _mediator) : ControllerBase
 {
@@ -29,10 +29,10 @@ public class ApplicationController(ISender _mediator) : ControllerBase
         return await _mediator.Send(command, cancellationToken);
     }
 
-    [HttpDelete("{id}")]
-    public async Task<Result<CommandApplicationResponse>> DeleteApplication(Guid id, [FromBody] CommandApplicationRequest request, CancellationToken cancellationToken)
+    [HttpDelete("{jobId}")]
+    public async Task<Result<CommandApplicationResponse>> DeleteApplication(Guid jobId, [FromBody] CommandApplicationRequest request, CancellationToken cancellationToken)
     {
-        var command = new DeleteApplicationCommand(id, request.ResumeId);
+        var command = new DeleteApplicationCommand(jobId, request.ResumeId);
         return await _mediator.Send(command, cancellationToken);
     }
 

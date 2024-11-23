@@ -15,8 +15,8 @@ public class ApplicationDbContext : IdentityDbContext<Account, UserRole, Guid>
     public required DbSet<Resume> Resumes { get; set; }
     public required DbSet<Skill> Skills { get; set; }
     public required DbSet<JobApplication> JobApplications { get; set; }
-    public required DbSet<InterviewSchedule> interviewSchedules { get; set; }
-    public required DbSet<ExperienceDetail> experienceDetails { get; set; }
+    public required DbSet<InterviewSchedule> InterviewSchedules { get; set; }
+    public required DbSet<ExperienceDetail> ExperienceDetails { get; set; }
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
 

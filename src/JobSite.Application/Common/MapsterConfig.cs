@@ -1,5 +1,5 @@
 
-using JobSite.Application.Application.Common;
+using JobSite.Application.InterviewSchedule.Commands.CreateInterviewSchedule;
 using JobSite.Application.Jobs.Commands.UpdateJob;
 using Mapster;
 
@@ -11,5 +11,9 @@ public class MapsterConfig : IRegister
     public void Register(TypeAdapterConfig config)
     {
         UpdateJobMappingConfig.Register(config);
+
+        CreateInterviewScheduleMappingConfig.Register(config);
+        UpadateInterviewScheduleMappingConfig.Register(config);
+
     }
 }

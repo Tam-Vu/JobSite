@@ -29,7 +29,15 @@ namespace JobSite.Infrastructure.Migrations
                 table: "InterviewSchedule");
 
             migrationBuilder.DropForeignKey(
+                name: "FK_InterviewSchedule_Resume_ResumeId",
+                table: "InterviewSchedule");
+
+            migrationBuilder.DropForeignKey(
                 name: "FK_JobApplication_Jobs_JobId",
+                table: "JobApplication");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_JobApplication_Resume_ResumeId",
                 table: "JobApplication");
 
             migrationBuilder.DropForeignKey(
@@ -69,6 +77,10 @@ namespace JobSite.Infrastructure.Migrations
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
+            migrationBuilder.DropIndex(
+                name: "IX_InterviewSchedule_JobId",
+                table: "InterviewSchedule");
+
             migrationBuilder.DropPrimaryKey(
                 name: "PK_ResumeSkill",
                 table: "ResumeSkill");
@@ -88,6 +100,10 @@ namespace JobSite.Infrastructure.Migrations
             migrationBuilder.DropPrimaryKey(
                 name: "PK_Accounts",
                 table: "Accounts");
+
+            migrationBuilder.DropColumn(
+                name: "JobId",
+                table: "InterviewSchedule");
 
             migrationBuilder.DropColumn(
                 name: "EndMonth",
@@ -140,6 +156,16 @@ namespace JobSite.Infrastructure.Migrations
             migrationBuilder.RenameTable(
                 name: "Accounts",
                 newName: "Account");
+
+            migrationBuilder.RenameColumn(
+                name: "ResumeId",
+                table: "InterviewSchedule",
+                newName: "JobApplicationId");
+
+            migrationBuilder.RenameIndex(
+                name: "IX_InterviewSchedule_ResumeId",
+                table: "InterviewSchedule",
+                newName: "IX_InterviewSchedule_JobApplicationId");
 
             migrationBuilder.RenameIndex(
                 name: "IX_ResumeSkill_SkillsId",
@@ -482,7 +508,7 @@ namespace JobSite.Infrastructure.Migrations
                 column: "AccountId",
                 principalTable: "Account",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Employer_Account_AccountId",
@@ -501,12 +527,12 @@ namespace JobSite.Infrastructure.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_InterviewSchedule_Job_JobId",
+                name: "FK_InterviewSchedule_JobApplication_JobApplicationId",
                 table: "InterviewSchedule",
-                column: "JobId",
-                principalTable: "Job",
+                column: "JobApplicationId",
+                principalTable: "JobApplication",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Job_Employer_EmployerId",
@@ -522,7 +548,15 @@ namespace JobSite.Infrastructure.Migrations
                 column: "JobId",
                 principalTable: "Job",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_JobApplication_Resume_ResumeId",
+                table: "JobApplication",
+                column: "ResumeId",
+                principalTable: "Resume",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Resume_Employee_EmployeeId",
@@ -530,7 +564,7 @@ namespace JobSite.Infrastructure.Migrations
                 column: "EmployeeId",
                 principalTable: "Employee",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_ResumeSkill (Dictionary<string, object>)_Resume_ResumeId",
@@ -565,7 +599,7 @@ namespace JobSite.Infrastructure.Migrations
                 table: "ExperienceDetail");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_InterviewSchedule_Job_JobId",
+                name: "FK_InterviewSchedule_JobApplication_JobApplicationId",
                 table: "InterviewSchedule");
 
             migrationBuilder.DropForeignKey(
@@ -574,6 +608,10 @@ namespace JobSite.Infrastructure.Migrations
 
             migrationBuilder.DropForeignKey(
                 name: "FK_JobApplication_Job_JobId",
+                table: "JobApplication");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_JobApplication_Resume_ResumeId",
                 table: "JobApplication");
 
             migrationBuilder.DropForeignKey(
@@ -698,6 +736,16 @@ namespace JobSite.Infrastructure.Migrations
                 name: "Account",
                 newName: "Accounts");
 
+            migrationBuilder.RenameColumn(
+                name: "JobApplicationId",
+                table: "InterviewSchedule",
+                newName: "ResumeId");
+
+            migrationBuilder.RenameIndex(
+                name: "IX_InterviewSchedule_JobApplicationId",
+                table: "InterviewSchedule",
+                newName: "IX_InterviewSchedule_ResumeId");
+
             migrationBuilder.RenameIndex(
                 name: "IX_ResumeSkill (Dictionary<string, object>)_SkillsId",
                 table: "ResumeSkill",
@@ -765,6 +813,13 @@ namespace JobSite.Infrastructure.Migrations
                 oldClrType: typeof(int),
                 oldType: "integer",
                 oldDefaultValue: 0);
+
+            migrationBuilder.AddColumn<Guid>(
+                name: "JobId",
+                table: "InterviewSchedule",
+                type: "uuid",
+                nullable: false,
+                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
 
             migrationBuilder.AddColumn<int>(
                 name: "EndMonth",
@@ -1002,6 +1057,11 @@ namespace JobSite.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_InterviewSchedule_JobId",
+                table: "InterviewSchedule",
+                column: "JobId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -1071,10 +1131,26 @@ namespace JobSite.Infrastructure.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
+                name: "FK_InterviewSchedule_Resume_ResumeId",
+                table: "InterviewSchedule",
+                column: "ResumeId",
+                principalTable: "Resume",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
                 name: "FK_JobApplication_Jobs_JobId",
                 table: "JobApplication",
                 column: "JobId",
                 principalTable: "Jobs",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_JobApplication_Resume_ResumeId",
+                table: "JobApplication",
+                column: "ResumeId",
+                principalTable: "Resume",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
 

@@ -15,7 +15,6 @@ public class Job : BaseAuditableEntity
     public int AppliedResumes { get; set; }
     public JobStatus Status { get; set; }
     public ICollection<JobApplication> Applications { get; set; } = new HashSet<JobApplication>();
-    public ICollection<InterviewSchedule> InterviewSchedules { get; set; } = new HashSet<InterviewSchedule>();
     public required Guid EmployerId { get; init; }
     public Employer Employer { get; set; } = null!;
 

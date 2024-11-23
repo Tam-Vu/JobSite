@@ -14,6 +14,7 @@ using JobSite.Infrastructure.Common.Security.Jwt;
 using JobSite.Infrastructure.Employees.Persistence;
 using JobSite.Infrastructure.Employers.Persistence;
 using JobSite.Infrastructure.EntityFrameworkCore;
+using JobSite.Infrastructure.InterviewSchedules.Persistence;
 using JobSite.Infrastructure.Jobs.Persistence;
 using JobSite.Infrastructure.Resumes.ExperienceDetails;
 using JobSite.Infrastructure.Resumes.Persistence;
@@ -69,6 +70,7 @@ public static class DependencyInjection
         services.AddScoped<IResumeRepository, ResumeRepository>();
         services.AddScoped<IExperienceDetailsRepository, ExperienceDetailsRepository>();
         services.AddScoped<IJobApplicationRepository, ApplicationRepository>();
+        services.AddScoped<IInterviewScheduleRepository, InterviewScheduleRepository>();
         services.AddScoped<IUser, CurrentUser>();
         services.AddProblemDetails();
         return services;

@@ -11,7 +11,7 @@ public class ResumeConfiguration : IEntityTypeConfiguration<Resume>
             .HasOne(x => x.Employee)
             .WithMany(x => x.Resumes)
             .HasForeignKey(x => x.EmployeeId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder
             .HasMany(x => x.Skills)

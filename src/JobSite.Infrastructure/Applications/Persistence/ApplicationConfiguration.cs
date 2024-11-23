@@ -14,12 +14,12 @@ public class ApplicationConfiguration : IEntityTypeConfiguration<JobApplication>
             .HasOne(x => x.Job)
             .WithMany(x => x.Applications)
             .HasForeignKey(x => x.JobId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder
             .HasOne(x => x.Resume)
             .WithMany(x => x.Applications)
             .HasForeignKey(x => x.ResumeId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

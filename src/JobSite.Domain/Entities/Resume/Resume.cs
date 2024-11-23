@@ -15,5 +15,4 @@ public class Resume : BaseAuditableEntity
     public ICollection<Skill> Skills { get; set; } = new HashSet<Skill>();
     public ICollection<ExperienceDetail> ExperienceDetails { get; set; } = new HashSet<ExperienceDetail>();
     public ICollection<JobApplication> Applications { get; private set; } = new HashSet<JobApplication>();
-    public ICollection<InterviewSchedule> InverviewSchedules { get; private set; } = new HashSet<InterviewSchedule>();
 }

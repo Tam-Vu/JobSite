@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JobSite.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241122111326_v2")]
+    [Migration("20241123053939_v2")]
     partial class v2
     {
         /// <inheritdoc />
@@ -196,7 +196,7 @@ namespace JobSite.Infrastructure.Migrations
                     b.Property<DateTime>("InterviewDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("JobId")
+                    b.Property<Guid>("JobApplicationId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTimeOffset>("LastModified")
@@ -208,9 +208,6 @@ namespace JobSite.Infrastructure.Migrations
                     b.Property<string>("Location")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("ResumeId")
-                        .HasColumnType("uuid");
-
                     b.Property<TimeOnly>("StartTime")
                         .HasColumnType("time without time zone");
 
@@ -221,9 +218,7 @@ namespace JobSite.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("JobId");
-
-                    b.HasIndex("ResumeId");
+                    b.HasIndex("JobApplicationId");
 
                     b.ToTable("InterviewSchedule");
                 });
@@ -542,7 +537,7 @@ namespace JobSite.Infrastructure.Migrations
                     b.HasOne("JobSite.Domain.Entities.Account", "Account")
                         .WithMany()
                         .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Account");
@@ -561,21 +556,13 @@ namespace JobSite.Infrastructure.Migrations
 
             modelBuilder.Entity("JobSite.Domain.Entities.InterviewSchedule", b =>
                 {
-                    b.HasOne("JobSite.Domain.Entities.Job", "Job")
+                    b.HasOne("JobSite.Domain.Entities.JobApplication", "JobApplication")
                         .WithMany("InterviewSchedules")
-                        .HasForeignKey("JobId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("JobApplicationId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("JobSite.Domain.Entities.Resume", "Resume")
-                        .WithMany("InverviewSchedules")
-                        .HasForeignKey("ResumeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Job");
-
-                    b.Navigation("Resume");
+                    b.Navigation("JobApplication");
                 });
 
             modelBuilder.Entity("JobSite.Domain.Entities.Job", b =>
@@ -594,13 +581,13 @@ namespace JobSite.Infrastructure.Migrations
                     b.HasOne("JobSite.Domain.Entities.Job", "Job")
                         .WithMany("Applications")
                         .HasForeignKey("JobId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("JobSite.Domain.Entities.Resume", "Resume")
                         .WithMany("Applications")
                         .HasForeignKey("ResumeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Job");
@@ -613,7 +600,7 @@ namespace JobSite.Infrastructure.Migrations
                     b.HasOne("JobSite.Domain.Entities.Employee", "Employee")
                         .WithMany("Resumes")
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.OwnsMany("JobSite.Domain.Entities.ExperienceDetail", "ExperienceDetails", b1 =>
@@ -746,15 +733,16 @@ namespace JobSite.Infrastructure.Migrations
             modelBuilder.Entity("JobSite.Domain.Entities.Job", b =>
                 {
                     b.Navigation("Applications");
+                });
 
+            modelBuilder.Entity("JobSite.Domain.Entities.JobApplication", b =>
+                {
                     b.Navigation("InterviewSchedules");
                 });
 
             modelBuilder.Entity("JobSite.Domain.Entities.Resume", b =>
                 {
                     b.Navigation("Applications");
-
-                    b.Navigation("InverviewSchedules");
                 });
 #pragma warning restore 612, 618
         }
