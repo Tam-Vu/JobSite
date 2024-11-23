@@ -20,7 +20,6 @@ public class TokenService : ITokenService
         var key = Encoding.ASCII.GetBytes(_jwtConfig.Secret);
         var claims = new List<Claim>
         {
-            // new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim(ClaimTypes.NameIdentifier, account.Id.ToString()),
             new Claim(ClaimTypes.Name, account.UserName!),
             new Claim(ClaimTypes.Email, account.Email!)
