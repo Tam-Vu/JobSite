@@ -37,7 +37,7 @@ public class InterviewScheduleController : ControllerBase
         return await _mediator.Send(command, cancellationToken);
     }
 
-    [HttpPut("Approve/{id}")]
+    [HttpPatch("Approve/{id}")]
     public async Task<Result<CommandsInterviewScheduleResponse>> ApproveInterviewSchedule(Guid id, [FromBody] ApproveInterviewScheduleRequest request, CancellationToken cancellationToken)
     {
         var command = new ApproveInterviewScheduleCommand(id, request.method);

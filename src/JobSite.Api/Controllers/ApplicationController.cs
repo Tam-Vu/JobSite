@@ -22,28 +22,32 @@ namespace JobSite.Api.Controllers;
 [Route("api/[controller]")]
 public class ApplicationController(ISender _mediator) : ControllerBase
 {
-    [HttpPost("{id}")]
-    public async Task<Result<CommandApplicationResponse>> CreateApplication(Guid id, [FromBody] CommandApplicationRequest request, CancellationToken cancellationToken)
+    [HttpPost("{jobId}")]
+    [Authorize(Roles = "Employee")]
+    public async Task<Result<CommandApplicationResponse>> CreateApplication(Guid jobId, [FromBody] CommandApplicationRequest request, CancellationToken cancellationToken)
     {
-        var command = new CreateApplicationCommand(id, request.ResumeId);
+        var command = new CreateApplicationCommand(jobId, request.ResumeId);
         return await _mediator.Send(command, cancellationToken);
     }
 
     [HttpDelete("{jobId}")]
+    [Authorize(Roles = "Employee")]
     public async Task<Result<CommandApplicationResponse>> DeleteApplication(Guid jobId, [FromBody] CommandApplicationRequest request, CancellationToken cancellationToken)
     {
         var command = new DeleteApplicationCommand(jobId, request.ResumeId);
         return await _mediator.Send(command, cancellationToken);
     }
 
-    [HttpPut("{id}")]
-    public async Task<Result<string>> UpdateApplication(Guid id, [FromBody] ApproveApplicationRequest request, CancellationToken cancellationToken)
+    [HttpPatch("{id}")]
+    [Authorize(Roles = "Employer")]
+    public async Task<Result<string>> ApproveApplication(Guid id, [FromBody] ApproveApplicationRequest request, CancellationToken cancellationToken)
     {
         var command = new ApproveApplicationCommand(id, request.method);
         return await _mediator.Send(command, cancellationToken);
     }
 
     [HttpGet("Job/{id}")]
+    [Authorize(Roles = "Employer")]
     public async Task<Result<List<ApplicationDto>>> GetApplication(Guid id, CancellationToken cancellationToken)
     {
         var query = new GetListApplicationsByJobQuery(id);
@@ -51,6 +55,7 @@ public class ApplicationController(ISender _mediator) : ControllerBase
     }
 
     [HttpGet("Resume/{id}")]
+    [Authorize(Roles = "Employee")]
     public async Task<Result<GetListApplicationByResumeResponse>> GetApplicationByResume(Guid id, CancellationToken cancellationToken)
     {
         var query = new GetListApplicationByResumeQuery(id);
@@ -58,6 +63,7 @@ public class ApplicationController(ISender _mediator) : ControllerBase
     }
 
     [HttpGet("My")]
+    [Authorize(Roles = "Employee")]
     public async Task<Result<List<JustApplicationDto>>> GetMyApplication(CancellationToken cancellationToken)
     {
         var query = new GetMyListApplicationsQuery();

@@ -1,6 +1,8 @@
 using JobSite.Infrastructure;
 using JobSite.Application;
 using JobSite.Api;
+using Microsoft.AspNetCore.Mvc;
+using JobSite.Infrastructure.Common.Persistence;
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddEndpointsApiExplorer()
@@ -39,5 +41,21 @@ app.AddInfrastructureApplication();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    try
+    {
+        var dbInitializer = services.GetService<DbInitializer>();
+        dbInitializer!.SeedingData().Wait();
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "An error occurred creating the DB.");
+    }
+};
+
 app.Run();
 

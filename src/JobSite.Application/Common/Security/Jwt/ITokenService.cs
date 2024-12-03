@@ -6,5 +6,5 @@ public interface ITokenService
 {
     (string token, int validDays) GenerateRefreshToken();
     Task<ClaimsIdentity> GetPrincipalFromExpiredToken(string? token);
-    string GenerateAccessToken(Account account, IEnumerable<string> roles);
+    string GenerateAccessTokenAsync(Account account, IList<string> roles);
 }

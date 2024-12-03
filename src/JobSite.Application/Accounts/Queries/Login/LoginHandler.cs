@@ -2,7 +2,6 @@
 
 using JobSite.Application.Common.Exceptions;
 using JobSite.Application.Common.Security.Jwt;
-using JobSite.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.VisualBasic;
 
@@ -11,8 +10,8 @@ public class LoginHandler : IRequestHandler<LoginQuery, LoginResponse>
 {
     private readonly UserManager<Account> _userManager;
     private readonly ITokenService _tokenService;
-    private readonly RoleManager<UserRole> _roleManager;
-    public LoginHandler(UserManager<Account> userManager, ITokenService tokenService, RoleManager<UserRole> roleManager)
+    private readonly RoleManager<Role> _roleManager;
+    public LoginHandler(UserManager<Account> userManager, ITokenService tokenService, RoleManager<Role> roleManager)
     {
         _userManager = userManager;
         _tokenService = tokenService;
@@ -36,8 +35,8 @@ public class LoginHandler : IRequestHandler<LoginQuery, LoginResponse>
             throw new BadRequestException("Invalid username or password");
         }
         var roles = await _userManager.GetRolesAsync(user);
-        var accessToken = _tokenService.GenerateAccessToken(user, roles);
-        LoginResponse response = new(accessToken, "hello");
+        var accessToken = _tokenService.GenerateAccessTokenAsync(user, roles);
+        LoginResponse response = new(accessToken, "");
         return response;
     }
 }

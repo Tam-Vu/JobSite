@@ -1,9 +1,7 @@
 using System.Net.Mail;
-using System.Security.Principal;
 using JobSite.Api.Services;
 using JobSite.Application.Common.Security.Identity;
 using JobSite.Application.Common.Security.Jwt;
-using JobSite.Domain.Identity;
 using JobSite.Infrastructure.Accounts.Persistence;
 using JobSite.Infrastructure.Application.Persistence;
 using JobSite.Infrastructure.Common.Middleware;
@@ -84,7 +82,7 @@ public static class DependencyInjection
 
     private static IServiceCollection AddIdentity(this IServiceCollection services)
     {
-        services.AddIdentity<Account, UserRole>(option =>
+        services.AddIdentity<Account, Role>(option =>
         {
             option.SignIn.RequireConfirmedEmail = true;
         })
@@ -105,6 +103,7 @@ public static class DependencyInjection
 
             options.User.RequireUniqueEmail = true;
         });
+        services.AddTransient<DbInitializer>();
         return services;
     }
 }

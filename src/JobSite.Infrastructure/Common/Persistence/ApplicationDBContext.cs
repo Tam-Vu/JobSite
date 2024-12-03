@@ -1,12 +1,12 @@
 
 using System.Reflection;
-using JobSite.Domain.Identity;
-using MediatR;
+using JobSite.Domain.Enums;
+using JobSite.Infrastructure.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace JobSite.Infrastructure.Common.Persistence;
-public class ApplicationDbContext : IdentityDbContext<Account, UserRole, Guid>
+public class ApplicationDbContext : IdentityDbContext<Account, Role, Guid>
 {
     public required DbSet<Job> Jobs { get; set; }
     public required DbSet<Employee> Employees { get; set; }
@@ -17,6 +17,7 @@ public class ApplicationDbContext : IdentityDbContext<Account, UserRole, Guid>
     public required DbSet<JobApplication> JobApplications { get; set; }
     public required DbSet<InterviewSchedule> InterviewSchedules { get; set; }
     public required DbSet<ExperienceDetail> ExperienceDetails { get; set; }
+    public required DbSet<Role> Role { get; set; }
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
 

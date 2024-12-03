@@ -4,6 +4,7 @@ using JobSite.Application.Accounts.Common;
 using JobSite.Application.Common.Exceptions;
 using JobSite.Application.Common.Models;
 using JobSite.Application.IRepository;
+using JobSite.Domain.Enums;
 using JobSite.Domain.Events;
 using Microsoft.AspNetCore.Identity;
 
@@ -43,9 +44,14 @@ public class CreateAccountHandler : IRequestHandler<CreateEmployeeAccountCommand
         var result = await _userManager.CreateAsync(newAccount, request.Password);
         if (!result.Succeeded)
         {
-            throw new BadRequestException($"Create account failed: {result.Errors}");
+            var errors = string.Join(", ", result.Errors.Select(e => $"{e.Code}: {e.Description}"));
+            throw new BadRequestException($"Create account failed: {errors}");
         }
-
+        var role = await _userManager.AddToRoleAsync(newAccount, nameof(AccountRole.Employee));
+        if (!role.Succeeded)
+        {
+            throw new Exception("Failed to assign role to admin user: " + string.Join(", ", role.Errors.Select(e => e.Description)));
+        }
         var newEmployee = new Employee
         {
             Fullname = request.Fullname,

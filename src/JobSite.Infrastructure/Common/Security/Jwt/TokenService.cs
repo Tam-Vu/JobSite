@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using JobSite.Application.Common.Security.Jwt;
 using JobSite.Infrastructure.Common.Security.BindingEnvClasses;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
 namespace JobSite.Infrastructure.Common.Security.Jwt;
@@ -15,7 +16,7 @@ public class TokenService : ITokenService
     {
         _jwtConfig = jwtConfig;
     }
-    public string GenerateAccessToken(Account account, IEnumerable<string> roles)
+    public string GenerateAccessTokenAsync(Account account, IList<string> roles)
     {
         var key = Encoding.ASCII.GetBytes(_jwtConfig.Secret);
         var claims = new List<Claim>
@@ -23,7 +24,7 @@ public class TokenService : ITokenService
             new Claim(ClaimTypes.NameIdentifier, account.Id.ToString()),
             new Claim(ClaimTypes.Name, account.UserName!),
             new Claim(ClaimTypes.Email, account.Email!)
-        };
+        }.Union(roles.Select(role => new Claim(ClaimTypes.Role, role)));
         var tokenHandler = new JwtSecurityTokenHandler();
 
         var tokenDescriptor = new SecurityTokenDescriptor
