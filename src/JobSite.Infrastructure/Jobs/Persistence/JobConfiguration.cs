@@ -18,6 +18,6 @@ public class JobConfiguration : IEntityTypeConfiguration<Job>
             .HasOne(x => x.Employer)
             .WithMany(x => x.Jobs)
             .HasForeignKey(x => x.EmployerId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

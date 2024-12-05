@@ -10,12 +10,10 @@ public class LoginHandler : IRequestHandler<LoginQuery, LoginResponse>
 {
     private readonly UserManager<Account> _userManager;
     private readonly ITokenService _tokenService;
-    private readonly RoleManager<Role> _roleManager;
-    public LoginHandler(UserManager<Account> userManager, ITokenService tokenService, RoleManager<Role> roleManager)
+    public LoginHandler(UserManager<Account> userManager, ITokenService tokenService)
     {
         _userManager = userManager;
         _tokenService = tokenService;
-        _roleManager = roleManager;
     }
 
     public async Task<LoginResponse> Handle(LoginQuery request, CancellationToken cancellationToken)
@@ -36,7 +34,7 @@ public class LoginHandler : IRequestHandler<LoginQuery, LoginResponse>
         }
         var roles = await _userManager.GetRolesAsync(user);
         var accessToken = _tokenService.GenerateAccessTokenAsync(user, roles);
-        LoginResponse response = new(accessToken, "");
+        LoginResponse response = new(accessToken);
         return response;
     }
 }

@@ -9,11 +9,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace JobSite.Infrastructure.Migrations
+namespace JobSite.Infrastructure.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241123053939_v2")]
-    partial class v2
+    [Migration("20241205094823_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -193,8 +193,8 @@ namespace JobSite.Infrastructure.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("InterviewDate")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly>("InterviewDate")
+                        .HasColumnType("date");
 
                     b.Property<Guid>("JobApplicationId")
                         .HasColumnType("uuid");
@@ -360,6 +360,33 @@ namespace JobSite.Infrastructure.Migrations
                     b.ToTable("Resume");
                 });
 
+            modelBuilder.Entity("JobSite.Domain.Entities.Role", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex");
+
+                    b.ToTable("Role", (string)null);
+                });
+
             modelBuilder.Entity("JobSite.Domain.Entities.Skill", b =>
                 {
                     b.Property<Guid>("Id")
@@ -385,33 +412,6 @@ namespace JobSite.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Skill");
-                });
-
-            modelBuilder.Entity("JobSite.Domain.Identity.UserRole", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex");
-
-                    b.ToTable("UserRole", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -570,7 +570,7 @@ namespace JobSite.Infrastructure.Migrations
                     b.HasOne("JobSite.Domain.Entities.Employer", "Employer")
                         .WithMany("Jobs")
                         .HasForeignKey("EmployerId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Employer");
@@ -656,7 +656,7 @@ namespace JobSite.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("JobSite.Domain.Identity.UserRole", null)
+                    b.HasOne("JobSite.Domain.Entities.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -683,7 +683,7 @@ namespace JobSite.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("JobSite.Domain.Identity.UserRole", null)
+                    b.HasOne("JobSite.Domain.Entities.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)

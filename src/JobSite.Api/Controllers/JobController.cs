@@ -12,6 +12,7 @@ using JobSite.Application.Jobs.Queries.GetListJobOfCompany;
 using JobSite.Contracts.Job;
 using JobSite.Domain.Enums;
 using Mapster;
+using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,10 +22,18 @@ namespace JobSite.Api.Controllers;
 [Authorize]
 [ApiController]
 [Route("api/[controller]")]
-public class JobController(ISender _mediator) : ControllerBase
+public class JobController : ControllerBase
 {
+    private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
+    public JobController(IMediator mediator, IMapper mapper)
+    {
+        _mediator = mediator;
+        _mapper = mapper;
+    }
 
     [HttpPost]
+    [Authorize(Roles = "Employer")]
     public async Task<Result<JobCommandResponse>> CreateNewJob(CreateJobCommand request, CancellationToken cancellationToken)
     {
         return await _mediator.Send(request, cancellationToken);
@@ -52,6 +61,7 @@ public class JobController(ISender _mediator) : ControllerBase
     }
 
     [HttpPut]
+    [Authorize(Roles = "Employer")]
     [Route("{id}")]
     public async Task<Result<JobCommandResponse>> UpdateJob(Guid id, [FromBody] UpdateJobRequest request, CancellationToken cancellationToken)
     {
@@ -69,6 +79,7 @@ public class JobController(ISender _mediator) : ControllerBase
     }
 
     [HttpPatch]
+    [Authorize(Roles = "Employer")]
     [Route("{id}")]
     public async Task<Result<JobCommandResponse>> ChangeJobStatus(Guid id, [FromBody] ChangeJobStatusRequest request, CancellationToken cancellationToken)
     {
@@ -77,6 +88,7 @@ public class JobController(ISender _mediator) : ControllerBase
     }
 
     [HttpDelete]
+    [Authorize(Roles = "Employer, Admin")]
     [Route("{id}")]
     public async Task<Result<string>> DeleteJob(Guid id, CancellationToken cancellationToken)
     {

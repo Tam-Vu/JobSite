@@ -21,6 +21,7 @@ public class EmployeeController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [Authorize(Roles = "Admin")]
     public async Task<GetSingleEmployeeResponse> GetSingleEmployee(Guid id, CancellationToken cancellationToken)
     {
         var request = new GetSingleEmployeeQuery(id);
@@ -28,6 +29,7 @@ public class EmployeeController : ControllerBase
     }
 
     [HttpDelete]
+    [Authorize(Roles = "Employee")]
     [Route("delete-my-account")]
     public async Task<Result<string>> DeleteEmployee(CancellationToken cancellationToken)
     {
@@ -36,6 +38,7 @@ public class EmployeeController : ControllerBase
     }
 
     [HttpPut]
+    [Authorize(Roles = "Employee")]
     [Route("update-my-information")]
     public async Task<Result<EmployeeCommandRespose>> UpdateEmployee([FromBody] UpdateEmployeeCommand command, CancellationToken cancellationToken)
     {
@@ -43,6 +46,7 @@ public class EmployeeController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Admin")]
     [Route("get-all-employees")]
     [AllowAnonymous]
     public async Task<Result<List<EmployeeResponse>>> GetListEmployees(CancellationToken cancellationToken)

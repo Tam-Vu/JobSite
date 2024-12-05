@@ -10,7 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobSite.Api.Controllers;
-
+[ApiController]
+[Route("api/[controller]")]
 public class EmployerController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -20,6 +21,7 @@ public class EmployerController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [AllowAnonymous]
     public async Task<Result<GetSingleEmployereResponse>> GetSingleEmployer(Guid id, CancellationToken cancellationToken)
     {
         var request = new GetSingleEmployerQuery(id);
@@ -27,6 +29,7 @@ public class EmployerController : ControllerBase
     }
 
     [HttpDelete]
+    [Authorize(Roles = "Employer")]
     [Route("delete-my-account")]
     public async Task<Result<string>> DeleteEmployer(CancellationToken cancellationToken)
     {
@@ -35,6 +38,7 @@ public class EmployerController : ControllerBase
     }
 
     [HttpPut]
+    [Authorize(Roles = "Employer")]
     [Route("update-my-information")]
     public async Task<Result<EmployerCommandRespose>> UpdateEmployer([FromBody] UpdateEmployerCommand command, CancellationToken cancellationToken)
     {
@@ -42,8 +46,8 @@ public class EmployerController : ControllerBase
     }
 
     [HttpGet]
-    [Route("get-all-Employers")]
     [AllowAnonymous]
+    [Route("get-all-Employers")]
     public async Task<Result<List<GetListEmployersResponse>>> GetListEmployers(CancellationToken cancellationToken)
     {
         var request = new GetListEmployersQuery();

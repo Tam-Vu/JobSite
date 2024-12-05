@@ -2,6 +2,7 @@ using System.Net.Mail;
 using JobSite.Api.Services;
 using JobSite.Application.Common.Security.Identity;
 using JobSite.Application.Common.Security.Jwt;
+using JobSite.Infrastructure.Accounts.BackgroundServices;
 using JobSite.Infrastructure.Accounts.Persistence;
 using JobSite.Infrastructure.Application.Persistence;
 using JobSite.Infrastructure.Common.Middleware;
@@ -106,6 +107,7 @@ public static class DependencyInjection
         });
         services.AddTransient<DbInitializer>();
         services.AddSingleton<IAuthorizationMiddlewareResultHandler, CustomAuthorizationMiddleware>();
+        services.AddHostedService<DeleteUnconfirmedAccount>();
         return services;
     }
 }

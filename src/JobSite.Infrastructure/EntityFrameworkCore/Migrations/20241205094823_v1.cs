@@ -4,54 +4,22 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace JobSite.Infrastructure.Migrations
+namespace JobSite.Infrastructure.EntityFrameworkCore.Migrations
 {
     /// <inheritdoc />
-    public partial class v0 : Migration
+    public partial class v1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Accounts",
+                name: "Account",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Username = table.Column<string>(type: "text", nullable: false),
-                    Password = table.Column<string>(type: "text", nullable: false),
-                    Image = table.Column<string>(type: "text", nullable: true),
-                    Address = table.Column<string>(type: "text", nullable: true),
-                    Role = table.Column<int>(type: "integer", nullable: false),
                     IsDisabled = table.Column<bool>(type: "boolean", nullable: false),
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    CreatedBy = table.Column<string>(type: "text", nullable: true),
                     LastModified = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Accounts", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetRoles",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "text", nullable: false),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -69,19 +37,47 @@ namespace JobSite.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.PrimaryKey("PK_Account", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Employees",
+                name: "Role",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Role", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Skill",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Skill", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Employee",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Fullname = table.Column<string>(type: "text", nullable: false),
                     Image = table.Column<string>(type: "text", nullable: true),
                     Address = table.Column<string>(type: "text", nullable: true),
-                    Phone = table.Column<string>(type: "text", nullable: true),
-                    Email = table.Column<string>(type: "text", nullable: true),
                     AccountId = table.Column<Guid>(type: "uuid", nullable: false),
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true),
@@ -90,17 +86,17 @@ namespace JobSite.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employees", x => x.Id);
+                    table.PrimaryKey("PK_Employee", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Employees_Accounts_AccountId",
+                        name: "FK_Employee_Account_AccountId",
                         column: x => x.AccountId,
-                        principalTable: "Accounts",
+                        principalTable: "Account",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Employers",
+                name: "Employer",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -117,117 +113,117 @@ namespace JobSite.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employers", x => x.Id);
+                    table.PrimaryKey("PK_Employer", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Employers_Accounts_AccountId",
+                        name: "FK_Employer_Account_AccountId",
                         column: x => x.AccountId,
-                        principalTable: "Accounts",
+                        principalTable: "Account",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetRoleClaims",
+                name: "IdentityUserClaim<Guid>",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    RoleId = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     ClaimType = table.Column<string>(type: "text", nullable: true),
                     ClaimValue = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.PrimaryKey("PK_IdentityUserClaim<Guid>", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserClaims",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<string>(type: "text", nullable: false),
-                    ClaimType = table.Column<string>(type: "text", nullable: true),
-                    ClaimValue = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                        name: "FK_IdentityUserClaim<Guid>_Account_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Account",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserLogins",
+                name: "IdentityUserLogin<Guid>",
                 columns: table => new
                 {
                     LoginProvider = table.Column<string>(type: "text", nullable: false),
                     ProviderKey = table.Column<string>(type: "text", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "text", nullable: true),
-                    UserId = table.Column<string>(type: "text", nullable: false)
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("PK_IdentityUserLogin<Guid>", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
-                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        name: "FK_IdentityUserLogin<Guid>_Account_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Account",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserRoles",
+                name: "IdentityUserToken<Guid>",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "text", nullable: false),
-                    RoleId = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserTokens",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     LoginProvider = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Value = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("PK_IdentityUserToken<Guid>", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
-                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        name: "FK_IdentityUserToken<Guid>_Account_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Account",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IdentityRoleClaim<Guid>",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    RoleId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ClaimType = table.Column<string>(type: "text", nullable: true),
+                    ClaimValue = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IdentityRoleClaim<Guid>", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_IdentityRoleClaim<Guid>_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Role",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IdentityUserRole<Guid>",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IdentityUserRole<Guid>", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_IdentityUserRole<Guid>_Account_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Account",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_IdentityUserRole<Guid>_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -251,25 +247,27 @@ namespace JobSite.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Resume", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Resume_Employees_EmployeeId",
+                        name: "FK_Resume_Employee_EmployeeId",
                         column: x => x.EmployeeId,
-                        principalTable: "Employees",
+                        principalTable: "Employee",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Jobs",
+                name: "Job",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     Location = table.Column<string>(type: "text", nullable: true),
+                    Requirement = table.Column<string>(type: "text", nullable: true),
+                    Benefit = table.Column<string>(type: "text", nullable: true),
                     Salary = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
                     JobType = table.Column<int>(type: "integer", nullable: false),
                     AppliedResumes = table.Column<int>(type: "integer", nullable: false),
-                    JobStatus = table.Column<int>(type: "integer", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
                     EmployerId = table.Column<Guid>(type: "uuid", nullable: false),
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true),
@@ -278,21 +276,23 @@ namespace JobSite.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Jobs", x => x.Id);
+                    table.PrimaryKey("PK_Job", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Jobs_Employers_EmployerId",
+                        name: "FK_Job_Employer_EmployerId",
                         column: x => x.EmployerId,
-                        principalTable: "Employers",
+                        principalTable: "Employer",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Skill",
+                name: "ExperienceDetail",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
+                    CompanyName = table.Column<string>(type: "text", nullable: false),
+                    StartDate = table.Column<string>(type: "text", nullable: false),
+                    EndDate = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     ResumeId = table.Column<Guid>(type: "uuid", nullable: false),
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
@@ -302,9 +302,63 @@ namespace JobSite.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Skill", x => x.Id);
+                    table.PrimaryKey("PK_ExperienceDetail", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Skill_Resume_ResumeId",
+                        name: "FK_ExperienceDetail_Resume_ResumeId",
+                        column: x => x.ResumeId,
+                        principalTable: "Resume",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ResumeSkill (Dictionary<string, object>)",
+                columns: table => new
+                {
+                    ResumeId = table.Column<Guid>(type: "uuid", nullable: false),
+                    SkillsId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ResumeSkill (Dictionary<string, object>)", x => new { x.ResumeId, x.SkillsId });
+                    table.ForeignKey(
+                        name: "FK_ResumeSkill (Dictionary<string, object>)_Resume_ResumeId",
+                        column: x => x.ResumeId,
+                        principalTable: "Resume",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ResumeSkill (Dictionary<string, object>)_Skill_SkillsId",
+                        column: x => x.SkillsId,
+                        principalTable: "Skill",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "JobApplication",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    JobId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ResumeId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
+                    Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobApplication", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_JobApplication_Job_JobId",
+                        column: x => x.JobId,
+                        principalTable: "Job",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_JobApplication_Resume_ResumeId",
                         column: x => x.ResumeId,
                         principalTable: "Resume",
                         principalColumn: "Id",
@@ -316,12 +370,11 @@ namespace JobSite.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    JobId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ResumeId = table.Column<Guid>(type: "uuid", nullable: false),
-                    InterviewDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    JobApplicationId = table.Column<Guid>(type: "uuid", nullable: false),
+                    InterviewDate = table.Column<DateOnly>(type: "date", nullable: false),
                     Location = table.Column<string>(type: "text", nullable: true),
                     StartTime = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
-                    Status = table.Column<int>(type: "integer", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true),
                     LastModified = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
@@ -331,129 +384,68 @@ namespace JobSite.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_InterviewSchedule", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InterviewSchedule_Jobs_JobId",
-                        column: x => x.JobId,
-                        principalTable: "Jobs",
+                        name: "FK_InterviewSchedule_JobApplication_JobApplicationId",
+                        column: x => x.JobApplicationId,
+                        principalTable: "JobApplication",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_InterviewSchedule_Resume_ResumeId",
-                        column: x => x.ResumeId,
-                        principalTable: "Resume",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "JobApplication",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    JobId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ResumeId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Status = table.Column<int>(type: "integer", nullable: false),
-                    Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    CreatedBy = table.Column<string>(type: "text", nullable: true),
-                    LastModified = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_JobApplication", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_JobApplication_Jobs_JobId",
-                        column: x => x.JobId,
-                        principalTable: "Jobs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_JobApplication_Resume_ResumeId",
-                        column: x => x.ResumeId,
-                        principalTable: "Resume",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Requirement",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    JobId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    CreatedBy = table.Column<string>(type: "text", nullable: true),
-                    LastModified = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Requirement", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Requirement_Jobs_JobId",
-                        column: x => x.JobId,
-                        principalTable: "Jobs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetRoleClaims_RoleId",
-                table: "AspNetRoleClaims",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "RoleNameIndex",
-                table: "AspNetRoles",
-                column: "NormalizedName",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserClaims_UserId",
-                table: "AspNetUserClaims",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserLogins_UserId",
-                table: "AspNetUserLogins",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserRoles_RoleId",
-                table: "AspNetUserRoles",
-                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
-                table: "AspNetUsers",
+                table: "Account",
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
-                table: "AspNetUsers",
+                table: "Account",
                 column: "NormalizedUserName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employees_AccountId",
-                table: "Employees",
+                name: "IX_Employee_AccountId",
+                table: "Employee",
                 column: "AccountId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employers_AccountId",
-                table: "Employers",
+                name: "IX_Employer_AccountId",
+                table: "Employer",
                 column: "AccountId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InterviewSchedule_JobId",
-                table: "InterviewSchedule",
-                column: "JobId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_InterviewSchedule_ResumeId",
-                table: "InterviewSchedule",
+                name: "IX_ExperienceDetail_ResumeId",
+                table: "ExperienceDetail",
                 column: "ResumeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_IdentityRoleClaim<Guid>_RoleId",
+                table: "IdentityRoleClaim<Guid>",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_IdentityUserClaim<Guid>_UserId",
+                table: "IdentityUserClaim<Guid>",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_IdentityUserLogin<Guid>_UserId",
+                table: "IdentityUserLogin<Guid>",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_IdentityUserRole<Guid>_RoleId",
+                table: "IdentityUserRole<Guid>",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InterviewSchedule_JobApplicationId",
+                table: "InterviewSchedule",
+                column: "JobApplicationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Job_EmployerId",
+                table: "Job",
+                column: "EmployerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_JobApplication_JobId",
@@ -466,76 +458,72 @@ namespace JobSite.Infrastructure.Migrations
                 column: "ResumeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Jobs_EmployerId",
-                table: "Jobs",
-                column: "EmployerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Requirement_JobId",
-                table: "Requirement",
-                column: "JobId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Resume_EmployeeId",
                 table: "Resume",
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Skill_ResumeId",
-                table: "Skill",
-                column: "ResumeId");
+                name: "IX_ResumeSkill (Dictionary<string, object>)_SkillsId",
+                table: "ResumeSkill (Dictionary<string, object>)",
+                column: "SkillsId");
+
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "Role",
+                column: "NormalizedName",
+                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AspNetRoleClaims");
+                name: "ExperienceDetail");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserClaims");
+                name: "IdentityRoleClaim<Guid>");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserLogins");
+                name: "IdentityUserClaim<Guid>");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserRoles");
+                name: "IdentityUserLogin<Guid>");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserTokens");
+                name: "IdentityUserRole<Guid>");
+
+            migrationBuilder.DropTable(
+                name: "IdentityUserToken<Guid>");
 
             migrationBuilder.DropTable(
                 name: "InterviewSchedule");
 
             migrationBuilder.DropTable(
-                name: "JobApplication");
+                name: "ResumeSkill (Dictionary<string, object>)");
 
             migrationBuilder.DropTable(
-                name: "Requirement");
+                name: "Role");
+
+            migrationBuilder.DropTable(
+                name: "JobApplication");
 
             migrationBuilder.DropTable(
                 name: "Skill");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Jobs");
+                name: "Job");
 
             migrationBuilder.DropTable(
                 name: "Resume");
 
             migrationBuilder.DropTable(
-                name: "Employers");
+                name: "Employer");
 
             migrationBuilder.DropTable(
-                name: "Employees");
+                name: "Employee");
 
             migrationBuilder.DropTable(
-                name: "Accounts");
+                name: "Account");
         }
     }
 }

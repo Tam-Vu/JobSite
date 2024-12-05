@@ -20,12 +20,14 @@ public class ResumeController(IMediator _mediator) : ControllerBase
 {
 
     [HttpPost]
+    [Authorize(Roles = "Employee")]
     public async Task<Result<ResponseResumeCommand>> CreateNewResume(CreateResumeCommand request, CancellationToken cancellationToken)
     {
         return await _mediator.Send(request, cancellationToken);
     }
 
     [HttpPut]
+    [Authorize(Roles = "Employee")]
     [Route("{id}")]
     public async Task<Result<ResponseResumeCommand>> UpdateResume(Guid id, UpdateResumeRequest request, CancellationToken cancellationToken)
     {
@@ -34,6 +36,7 @@ public class ResumeController(IMediator _mediator) : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Admin")]
     [Route("get-all-resume")]
     public async Task<List<ResponseResumeQuery>> GetAllResume(CancellationToken cancellationToken)
     {
@@ -49,10 +52,19 @@ public class ResumeController(IMediator _mediator) : ControllerBase
     }
 
     [HttpDelete]
+    [Authorize(Roles = "Admin, Employee")]
     [Route("{id}")]
     public async Task<Result<string>> DeleteResume(Guid id, CancellationToken cancellationToken)
     {
         var command = new DeleteResumeCommand(id);
         return await _mediator.Send(command, cancellationToken);
+    }
+
+    [HttpGet]
+    [Authorize(Roles = "Employee")]
+    [Route("my-resumes")]
+    public async Task<List<ResponseResumeQuery>> GetMyResumes(CancellationToken cancellationToken)
+    {
+        return await _mediator.Send(new GetListResumeQuery(), cancellationToken);
     }
 }
