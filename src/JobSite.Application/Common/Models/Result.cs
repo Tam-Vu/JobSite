@@ -34,24 +34,13 @@ public class Result<T>
 
 public class ResultError
 {
-    public string Code { get; set; }
+    public int Code { get; set; }
     public string Message { get; set; }
 
-    public ResultError(ErrorCodes code, string message)
+    public ResultError(int code, string message)
     {
-        Code = code.ToString();
+        Code = code;
         Message = message;
     }
 
-}
-public enum ErrorCodes
-{
-    NotFound,
-    Invalid,
-    Unauthorized,
-    Forbidden,
-    Conflict,
-    InternalServerError,
-    PermissionValidation,
-    BadRequest
 }

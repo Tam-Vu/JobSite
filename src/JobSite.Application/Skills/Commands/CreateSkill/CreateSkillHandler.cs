@@ -1,3 +1,4 @@
+using System.Net;
 using JobSite.Application.Common.Exceptions;
 using JobSite.Application.Common.Models;
 using JobSite.Application.IRepository;
@@ -18,7 +19,7 @@ public class CreateSkillHandler : IRequestHandler<CreateSkillCommand, Result<str
         {
             return Result<string>.Fail(new List<ResultError>
             {
-                new ResultError(ErrorCodes.Conflict, "Skill already exist"),
+                new ResultError((int)HttpStatusCode.Conflict, "Skill already exist"),
             });
         }
         var entity = new Skill

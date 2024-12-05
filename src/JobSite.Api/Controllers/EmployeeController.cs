@@ -1,5 +1,8 @@
+using JobSite.Application.Common.Models;
 using JobSite.Application.Employees.Commands;
-using JobSite.Application.Employees.Commands.CreateEmployee;
+using JobSite.Application.Employees.Commands.UpdateEmployee;
+using JobSite.Application.Employees.Common;
+using JobSite.Application.Employees.Queries.GetListEmployees;
 using JobSite.Application.Employees.Queries.GetSingleEmployee;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -17,16 +20,34 @@ public class EmployeeController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost]
-    public async Task<EmployeeCommandRespose> CreateEmployee(CreateEmployeeComamnd request, CancellationToken cancellationToken)
-    {
-        return await _mediator.Send(request, cancellationToken);
-    }
-
     [HttpGet("{id}")]
     public async Task<GetSingleEmployeeResponse> GetSingleEmployee(Guid id, CancellationToken cancellationToken)
     {
         var request = new GetSingleEmployeeQuery(id);
+        return await _mediator.Send(request, cancellationToken);
+    }
+
+    [HttpDelete]
+    [Route("delete-my-account")]
+    public async Task<Result<string>> DeleteEmployee(CancellationToken cancellationToken)
+    {
+        var request = new DeleteEmployeeCommand();
+        return await _mediator.Send(request, cancellationToken);
+    }
+
+    [HttpPut]
+    [Route("update-my-information")]
+    public async Task<Result<EmployeeCommandRespose>> UpdateEmployee([FromBody] UpdateEmployeeCommand command, CancellationToken cancellationToken)
+    {
+        return await _mediator.Send(command, cancellationToken);
+    }
+
+    [HttpGet]
+    [Route("get-all-employees")]
+    [AllowAnonymous]
+    public async Task<Result<List<EmployeeResponse>>> GetListEmployees(CancellationToken cancellationToken)
+    {
+        var request = new GetListEmployeesQuery();
         return await _mediator.Send(request, cancellationToken);
     }
 }

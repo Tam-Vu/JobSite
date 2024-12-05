@@ -34,7 +34,6 @@ public class ResumeController(IMediator _mediator) : ControllerBase
     }
 
     [HttpGet]
-    [AllowAnonymous]
     [Route("get-all-resume")]
     public async Task<List<ResponseResumeQuery>> GetAllResume(CancellationToken cancellationToken)
     {
@@ -47,5 +46,13 @@ public class ResumeController(IMediator _mediator) : ControllerBase
     {
         var request = new GetResumeDetailsQuery(id);
         return await _mediator.Send(request, cancellationToken);
+    }
+
+    [HttpDelete]
+    [Route("{id}")]
+    public async Task<Result<string>> DeleteResume(Guid id, CancellationToken cancellationToken)
+    {
+        var command = new DeleteResumeCommand(id);
+        return await _mediator.Send(command, cancellationToken);
     }
 }

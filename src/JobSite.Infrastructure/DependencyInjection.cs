@@ -17,6 +17,7 @@ using JobSite.Infrastructure.Jobs.Persistence;
 using JobSite.Infrastructure.Resumes.ExperienceDetails;
 using JobSite.Infrastructure.Resumes.Persistence;
 using JobSite.Infrastructure.Resumes.Skills;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -104,6 +105,7 @@ public static class DependencyInjection
             options.User.RequireUniqueEmail = true;
         });
         services.AddTransient<DbInitializer>();
+        services.AddSingleton<IAuthorizationMiddlewareResultHandler, CustomAuthorizationMiddleware>();
         return services;
     }
 }

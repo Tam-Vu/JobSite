@@ -1,4 +1,4 @@
-namespace JobSite.Application.Employees.Commands;
+namespace JobSite.Application.Employees.Common;
 
 public record EmployeeCommandRespose(
     string Fullname,

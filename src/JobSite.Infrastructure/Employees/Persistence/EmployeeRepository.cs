@@ -1,5 +1,6 @@
 using System.Linq.Expressions;
 using JobSite.Application.Common.Exceptions;
+using JobSite.Application.Employees.Common;
 using JobSite.Application.Employees.Queries.GetSingleEmployee;
 using JobSite.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
@@ -26,6 +27,32 @@ public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository
             }
         ).SingleAsync(cancellationToken);
         return employee ?? throw new BadRequestException("Employee not found");
+    }
+
+    public Task<List<EmployeeResponse>> GetListEmployeesAsync(CancellationToken cancellationToken)
+    {
+        try
+        {
+            var employees =
+            (
+                from emps in _dbContext.Employees
+                join acc in _dbContext.Accounts
+                on emps.AccountId equals acc.Id
+                select new EmployeeResponse(
+                    emps.Id,
+                    acc.Id,
+                    emps.Fullname,
+                    emps.Address ?? "",
+                    acc.PhoneNumber!,
+                    emps.Image ?? ""
+                )
+            ).ToListAsync(cancellationToken);
+            return employees;
+        }
+        catch (Exception e)
+        {
+            throw new BadRequestException(e.Message);
+        }
     }
 
     public async Task<GetSingleEmployeeResponse> GetSingleEmployeeAndEmailAsync(Guid id, CancellationToken cancellationToken)
