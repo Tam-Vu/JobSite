@@ -75,6 +75,7 @@ Here you list all prerequisites necessary for running your project. For example:
 
 - [ASP.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 - [PostgreSQL](https://www.postgresql.org/)
+- C#
 
 <h3>Cloning</h3>
 
