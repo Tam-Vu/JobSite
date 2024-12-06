@@ -16,11 +16,15 @@
 
 
 - Clean Architecture:
-![clean_architecture](https://github.com/user-attachments/assets/e7f2d901-ee45-4476-8823-22bb77f0917c)
+<div align="center">
+    <img src="https://github.com/user-attachments/assets/e7f2d901-ee45-4476-8823-22bb77f0917c" alt="clean_architecture">
+</div>
  
 - CQRS:
-  
-![CQRS-Pattern](https://github.com/user-attachments/assets/839a4f60-48b9-4b23-a5e6-971612b7507c)
+
+<div align="center">
+	<img src="https://github.com/user-attachments/assets/839a4f60-48b9-4b23-a5e6-971612b7507c" alt="CQRS-Pattern">
+</div>
 <h2 id="structure">📂 Folder Structure</h2>
 
 - Api
