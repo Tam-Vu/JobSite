@@ -29,7 +29,7 @@
 
 - Api
   - Is where endpoints are located. 
-  - receives input data and passes commands or queries down to the `application` layer. 
+  - receives input data and passes commands or queries down to the `Application` layer. 
 - Contract:
   - Holds the input data within a request body. This data, along with parameters or query parameters, is formatted to comply with the input data requirements of the application layer.
   - Invoked by the `Api` layer.
@@ -64,6 +64,7 @@
 - Mapster
 - FluentEmail
 - Authentication.JwtBearer
+- Linq
 
 <h2 id="started">🚀 Getting started</h2>
 
