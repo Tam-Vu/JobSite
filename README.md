@@ -3,10 +3,10 @@
 <h1 align="center" style="font-weight: bold;">JobSite (Job search website)</h1>
 
 <p align="center">
-<a href="#architecture">Architecture and Design Pattern</a> -
-<a href="#structure">Folder Structure</a> -
-<a href="#libraries">Libraries</a> -
-<a href="#started">Getting Started</a>
+<a href="#architecture">📐 Architecture and Design Pattern</a> -
+<a href="#structure">📂 Folder Structure</a> -
+<a href="#libraries">💻 Libraries</a> -
+<a href="#started">🚀 Getting Started</a>
 </p>
 
 
@@ -39,7 +39,7 @@
     - Commands folder: Contains 3 files: Command (specifies input data), Handler (processes logic), and Validator (validates input data).
     - Queries folder: Contains 3 files: Query (specifies input data), Handler (processes logic), and Response (defines output data).
     - Common folder: Contains commonly used data such as mappers for entities with input and output data.
-  - IRepository folder: Declares interfaces that will be defined in the Infrastructure layer
+  - IRepository folder: Declares interfaces that will be defined in the `Infrastructure` layer
   - Call the `Infrastructure` layer during data processing.
   - Called by `Api` folder.
 - Infrastructure:
@@ -48,8 +48,8 @@
 	  - Contains application database context and database initialized.
   - Each entity has:
 	- Configuration: file to define the relationship between two entities.
-	- Repository: to define interface in the Irepository folder in Application layer.
-	- Background Service(optional): to define background service for specific entities.
+	- Repository: to define interface in the Irepository folder in `Application` layer.
+	- Background Service(optional): to define background service.
   - EntityFrameworkCore: contains interceptors and imgrations.
   - Called by `Application` layer.
 - Domain:
